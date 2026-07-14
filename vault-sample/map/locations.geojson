@@ -1,0 +1,204 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.033, 33.342] },
+      "properties": {
+        "id": "body-site",
+        "name": "The Dying Avocado Grove (body site)",
+        "category": "case",
+        "role": "pin",
+        "summary": "Where Marisol is found — a drought-killed grove off old Highway S16, staged to read as a passion killing.",
+        "detail": "The novel's first image and its forensic spine. A hillside avocado grove in the Pala/Pauma backcountry, off old Highway S16 near where it meets SR-76 — private land in probate, the trees stumped or dying after the drought years and the water-rate hikes, fruit rotting black on the ground, the irrigation cut dry. Chaparral pressing in at the grove's edge where the county's water stopped pretending.\n\n**How the place functions in the story:** the grove is the county's economy and the county's conscience in one frame — a place built on cheap water and cheap labor, abandoned the moment the arithmetic changed. Marisol is *filed* here, not hidden: staged among the discarded trees the way her case will be staged among the discarded files. Vega returns in ch. 5 and again in the 1994 coda of ch. 8; the place should be different in each light.\n\n---\n\n### Case canon — what the grove gives up\n\nThe staging says *backcountry passion killing*. The body says otherwise:\n\n- **Livor mortis fixed inconsistent with position** → she was moved hours after death.\n- **Fractured hyoid + preserved ligature furrow** → ligature strangulation — though the ME hedged, and the exact cause of death is formally **OPEN**.\n- **Arid backcountry conditions** → partial mummification preserved the furrow, fibers, and trace that a wetter county would have erased.\n- **Decomposition and insect succession behind schedule** for the exposure interval → kept cool and enclosed before the dump.\n- **Body washed — too clean** → industrial cleaner residue; nobody's rage scrubs a corpse.\n- **Institutional trace** → concrete dust in hair and clothing seams.\n- **Restraint marks with healing** at wrists and ankles → held alive for days.\n- **A distinctive institutional ligature** → flat woven strap, machine-finished edge; source **OPEN**.\n\n**Deliberately unsolved threads (keep OPEN):** which institution held her; the abductor's identity behind the ride ruse; exact cause of death; one **unplaceable trace element** in the fibers; and the \"**two hands**\" whisper — parts of the physical story read as two different people's work.",
+        "fields": [
+          { "label": "Terrain", "value": "Hillside grove at the chaparral edge; dry irrigation cut; decomposed-granite soil", "estimate": true },
+          { "label": "Elevation", "value": "~800–1,200 ft", "estimate": true },
+          { "label": "Grove condition (1994)", "value": "Stumped/dying — late-80s–early-90s drought plus water-district rate hikes made marginal hillside groves uneconomic", "estimate": true },
+          { "label": "Dominant flora at the edge", "value": "Chamise, manzanita, laurel sumac, white & black sage, California buckwheat, chaparral yucca; cured golden non-native grasses", "estimate": true },
+          { "label": "Likely fauna", "value": "Southern Pacific rattlesnake, coyote, turkey vulture, mule deer; bobcat; mountain lion rare", "estimate": true },
+          { "label": "July high / Jan low", "value": "~90°F / ~40°F", "estimate": true },
+          { "label": "Why evidence survived", "value": "Arid heat + low humidity → partial mummification; preserved ligature furrow, fibers, trace", "estimate": true },
+          { "label": "Access (1994)", "value": "Old Highway S16 (Pala–Temecula Rd) to an unnamed ranch spur; no gate log, no witnesses", "estimate": false }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.0864, 33.1192] },
+      "properties": {
+        "id": "city-center",
+        "name": "Escondida — city center (working name)",
+        "category": "city",
+        "role": "pin",
+        "summary": "The fictional inland city — modeled on Escondido (\"hidden\" in Spanish); the county seat of the novel's apparatus.",
+        "detail": "**Working name: \"Escondida\"** — a fictional city modeled closely on Escondido, and, like it, named for hiding (*escondido/escondida* — \"hidden\" in Spanish). The name is the theme in city-limits signage: a place whose economy, politics, and dead are all, in some sense, hidden in plain sight. Rename freely; nothing downstream hard-codes it.\n\nGrand-style avenue downtown, 1880s storefronts under 1970s facades, packing sheds along the rail spur, new stucco subdivisions eating the citrus on the north slopes. In 1994 the city is mid-transition: the avocado and citrus money is old and thinning, aerospace layoffs from the recession are still working through the county, and the growth machine (developers, the DA's office, the chamber, the paper) runs the place with a handshake smoothness that the novel treats as weather.\n\n**How the place functions in the story:** Escondida is the apparatus made walkable. Vega's precinct, Crane's courthouse office, the diner, and Dana's house all sit within a few minutes of each other — the book's daylight world, where everything is polite and nothing is asked. The backcountry (the grove, the barranco, the river) is where the county's truths get taken. The novel's geography is that commute.",
+        "fields": [
+          { "label": "Population (1994)", "value": "~112,000", "estimate": true },
+          { "label": "Median household income (early 90s)", "value": "~$31,000", "estimate": true },
+          { "label": "Economy", "value": "Avocado/citrus packing, retail, county services; recession-era aerospace layoffs still biting", "estimate": true },
+          { "label": "July high / Jan low", "value": "~89°F / ~39°F", "estimate": true },
+          { "label": "Weather rhythm", "value": "May gray/June gloom marine layer; Santa Ana winds in fall; winter rains Dec–Mar — inland valley, not desert", "estimate": true },
+          { "label": "Working name note", "value": "\"Escondida\" is a placeholder — the model is Escondido; keep the meaning (\"hidden\"), change the name at will", "estimate": false }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.0905, 33.1247] },
+      "properties": {
+        "id": "precinct",
+        "name": "Escondida PD — Detectives' Bureau (1994)",
+        "category": "police",
+        "role": "pin",
+        "summary": "Vega and Brennan's floor: fluorescent light, typewriters giving way to terminals, and a chain of command that leads somewhere.",
+        "detail": "A 1960s civic-block building a few streets off the main avenue: brown brick, flag, dying ficus in the lobby. The detectives' bureau is second floor — a bullpen of paired steel desks, one shared terminal that nobody trusts, typewriters that everybody does, an evidence cage with a clipboard log, and an interview room whose acoustic tile holds thirty years of cigarette smoke.\n\n**How the place functions in the story:** the bureau is Brennan's church and Vega's cover. For Brennan, every squeak of the stairwell is four generations of family history; for Vega, the building is a costume he wears well. It is also, invisibly, the Ring's instrument — the routing slips, the case assignments, the files that die in drawers all pass through this floor. When Brennan finally *reports up* (May 1994), he does it here, at a desk, in good faith, with carbon copies. Stage that scene as banal — the fatal act is paperwork.\n\nThe 2024 interrogation suite (the frame's room) belongs to the successor department: glass, cameras, good coffee. Same chain of command; better upholstery.",
+        "fields": [
+          { "label": "Patrol shift pattern (era-typical)", "value": "4/10s; day watch on at 0600, night watch at 1800", "estimate": true },
+          { "label": "Detectives' hours", "value": "0700–1700 nominal, Mon–Fri; homicide callouts anytime", "estimate": true },
+          { "label": "Clock-in", "value": "Sign the watch log at the desk sergeant's counter; detectives initial the board by 0715", "estimate": true },
+          { "label": "Equipment (1994)", "value": "Typewriters + one shared terminal; teletype for wants/warrants; Polaroids and 35mm for scenes", "estimate": true },
+          { "label": "Coffee", "value": "Bunn burner, last washed in the Carter administration", "estimate": false }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.128, 33.371] },
+      "properties": {
+        "id": "river-wash",
+        "name": "San Luis Rey River wash",
+        "category": "nature",
+        "role": "pin",
+        "summary": "The dry river along SR-76 — coast live oak and cottonwood shade, the backcountry's green thread and its secrets' corridor.",
+        "detail": "The San Luis Rey runs — when it runs — from the mountains through Pauma Valley and past Pala, west along SR-76 toward the coast. Most of the year, and most of the early-90s drought years, it is a **wash**: white sand and cobble, pools going green in the shade, coast live oaks on the terraces and a ribbon of cottonwood and willow marking where the water hides underground.\n\n**How the place functions in the story:** the river is the backcountry's one soft place — shade, birdsong, water you can hear but not always see. Marisol could name every bird in it (the humanizing detail that outlives her). Vega walks it twice: once in April 1994, the day before he finds Lucia, and once in the ch. 8 coda. It is also a corridor — the route between highway and hills that doesn't show up on anyone's log — and the novel quietly implies the county has always used it that way.\n\nWrite the wash by ear: cicadas, oak leaves ticking as they cool, sand giving under boots. The one place in the book where Vega stops measuring.",
+        "fields": [
+          { "label": "Riparian flora", "value": "Coast live oak on terraces; Fremont cottonwood, willow, mule fat in the channel; sycamore at bends", "estimate": true },
+          { "label": "Flow (1994)", "value": "Intermittent — surface water in stretches after winter rains, dry sand by June", "estimate": true },
+          { "label": "Likely fauna", "value": "Red-tailed hawks, ravens, quail; coyotes at dusk; rattlesnakes on the warm cobble; mule deer to water", "estimate": true },
+          { "label": "Sound signature", "value": "Cicadas, oak-leaf tick, sand underfoot — the book's one unmeasured place", "estimate": false }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.078, 33.3688] },
+      "properties": {
+        "id": "gas-station",
+        "name": "Pala 76 Station (working name)",
+        "category": "commercial",
+        "role": "pin",
+        "summary": "The last gas before the backcountry — orange ball on a pole, a register that sees everyone, a clerk who remembers cars.",
+        "detail": "**Working name.** A two-pump station at the Pala junction where S16 meets SR-76 — the last fuel, cigarettes, and coffee before the road bends east into the valley. Orange-ball sign on a pole (Unocal 76 era), oil-stained apron, a rack of maps nobody buys, a bell hose that rings twice for every truck.\n\n**How the place functions in the story:** every backcountry story passes a place like this, and the novel uses it as the case's turnstile. The clerk (night shift, community-college textbooks under the counter) remembers **cars, not faces** — and one of the canvass details that *moves* between Vega's tellings (ch. 1 vs ch. 4) is anchored here. Keep the station's physical facts rock-solid in the prose so the moved detail stands out on re-read.\n\nAlso the novel's cheapest, best period texture: pump prices on flip numerals, a glass-door cooler humming, a wire rack of chips, the pay phone outside with the county's grime on the receiver — the phone that matters twice in 1994.",
+        "fields": [
+          { "label": "Regular, self-serve (CA, 1994)", "value": "~$1.15/gal", "estimate": true },
+          { "label": "Cigarettes", "value": "~$1.90/pack", "estimate": true },
+          { "label": "Era brands on this road", "value": "Unocal 76, Texaco, Chevron", "estimate": true },
+          { "label": "Hours", "value": "0600–2200; pumps dark after close — no pay-at-pump out here yet", "estimate": true },
+          { "label": "Pay phone", "value": "Outside, southeast corner; local calls 20¢", "estimate": true }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.0837, 33.1176] },
+      "properties": {
+        "id": "diner",
+        "name": "The Owl Café (working name)",
+        "category": "commercial",
+        "role": "pin",
+        "summary": "Where Vega thinks — corner booth, coffee refills, the case spread out under the sugar shaker.",
+        "detail": "**Working name.** A 1950s diner on the avenue downtown: counter, spinning stools, six booths, a neon owl that hasn't blinked right since the Nixon years. Open early for the packing-shed shift, dead from two to five, warm all night in the window light.\n\n**How the place functions in the story:** this is Vega's true office. The corner booth is where he quantifies — napkin arithmetic, receipts fanned out, the sugar shaker holding down the county map. The waitress (name OPEN; she's worked here since before the interstate) refills without asking and is the closest thing the 1994 thread has to a neutral witness of Vega's decline: the reader can track the case's weight by his orders shrinking from plates to coffee.\n\nTwo load-bearing scenes: the ch. 6 conversation with Brennan in the car **outside** the diner — the last honest one, staged deliberately at the threshold of Vega's thinking-place, not inside it — and a 2024 echo, when Vega discovers the diner is still there, renamed, and sits in the wrong booth on purpose.",
+        "fields": [
+          { "label": "Hours", "value": "0530–2200, seven days", "estimate": true },
+          { "label": "Coffee", "value": "~75¢, bottomless", "estimate": true },
+          { "label": "Blue-plate special (1994)", "value": "~$4.95", "estimate": true },
+          { "label": "Smoking section", "value": "Yes — 1994 California; the ban is a year away and nobody here believes it's coming", "estimate": true },
+          { "label": "Story function", "value": "Vega's thinking-place; the neutral witness; the wrong booth in 2024", "estimate": false }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.051, 33.133] },
+      "properties": {
+        "id": "institution",
+        "name": "The Institutional Interior (unresolved)",
+        "category": "institution",
+        "role": "pin",
+        "summary": "Where Marisol was held — a controlled interior known only by its traces: concrete dust, industrial cleaner, cool air. Which institution: deliberately OPEN.",
+        "detail": "**Map note: this pin's position is notional** — parked at the city's eastern industrial edge as a placeholder. The novel never resolves *which* institution this was, and the pin should keep that faith: it marks an idea, not an address.\n\nWhat the evidence establishes is an **interior**: controlled temperature, concrete construction, cleaned to an industrial standard, private enough to hold a woman for days. The county of 1994 is full of candidate rooms, all respectable — a packing-house cold room, a county annex basement, a clinic wing, a church retreat's utility floor, a jail corridor nobody audits. The horror the novel wants is exactly that surplus of candidates: the apparatus has so many rooms.\n\n---\n\n### Case canon — what the interior left on her\n\n- **Kept cool and enclosed** → decomposition/insect timeline behind schedule for the grove exposure interval.\n- **Concrete dust** in hair and clothing seams — construction-grade, source unmatched.\n- **Industrial cleaner residue** on skin and under nails (period-typical: pine-oil and quaternary-ammonium formulations).\n- **Restraint marks with healing** at wrists and ankles → held alive for days.\n- **A distinctive institutional ligature** — flat woven strap, machine-finished edge, the kind of thing issued by the case, not bought for it.\n- Death by **ligature strangulation** (fractured hyoid, preserved furrow) — with the ME's hedge preserved: exact cause of death formally **OPEN**.\n\n**Deliberately unsolved threads (keep OPEN):** which institution; the abductor behind the ride ruse; the **unplaceable trace element** in the fibers; the \"**two hands**\" whisper — restraint and death may not be the same person's work.\n\n**Craft note:** never let Vega (or the reader) tour the actual room. It exists only as trace evidence and as the reader's imagination multiplying candidate doors across the county. The moment it becomes one address, it stops being the apparatus.",
+        "fields": [
+          { "label": "Environment", "value": "Controlled interior: cool, enclosed, concrete; industrial cleaning regimen", "estimate": false },
+          { "label": "Period industrial cleaners", "value": "Pine-oil and quaternary-ammonium formulations in institutional use", "estimate": true },
+          { "label": "Candidate institutions (1994 county)", "value": "Packing-house cold rooms, county annex basements, clinic wings, church facilities, jail corridors — surplus of respectable rooms", "estimate": true },
+          { "label": "Resolution status", "value": "OPEN — deliberately never resolved in the novel", "estimate": false }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.0148, 33.3495] },
+      "properties": {
+        "id": "barranco",
+        "name": "Barranco Escondido — the hidden ravine",
+        "category": "nature",
+        "role": "pin",
+        "summary": "The recurring place motif: a hidden ravine in the backcountry where the county's truths are taken — and where Vega and Lucia made their treaty.",
+        "detail": "The title place and the novel's recurring motif — a steep, brush-choked ravine folded into the hills between the grove and Pauma Valley, invisible from every road, findable only if someone shows you. *Barranco escondido*: the hidden ravine. The county is named for hiding; this is where it does it.\n\n**How the place functions in the story:** the barranco appears once per act, changed each time by what the reader now knows.\n\n- **Ch. 1:** geography only — a landmark on the canvass map, a name Vega mispronounces on purpose to see who corrects him.\n- **Ch. 4 (the treaty):** where Vega finds Lucia in April 1994. One conversation, unrecorded, in the oak shade at the bottom — the buried agreement the whole novel orbits. Content withheld until later; the *place* does the withholding.\n- **Ch. 5:** re-seen after the inversion — not a hiding place but a keeping place; the distinction is the theme.\n- **Ch. 8 coda:** the ravine gives up what it has held since April 1994.\n\nPhysically: granite shoulders, a dry pour-over, one improbable coast live oak grown sideways out of the wall, shade ten degrees cooler than the slope, and silence with a floor to it. The kind of place the chaparral keeps for itself.\n\n**Craft note:** the barranco must never appear on the case's official maps — its absence from the record is what makes it a treaty-place. Only three living people can find it; by ch. 8 the reader should be able to count them.",
+        "fields": [
+          { "label": "Terrain", "value": "Steep granite-walled ravine; dry pour-over; oak shade at the bottom", "estimate": true },
+          { "label": "Microclimate", "value": "~10°F cooler than the exposed slope; still air; sound-shadowed", "estimate": true },
+          { "label": "Flora", "value": "Chamise and manzanita on the shoulders; laurel sumac; one sideways coast live oak; ferns at the seep", "estimate": true },
+          { "label": "Who can find it", "value": "Three living people by ch. 8 — the reader should be able to name them", "estimate": false }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.03, 33.34] },
+      "properties": {
+        "id": "region-backcountry",
+        "name": "Pala–Pauma backcountry",
+        "category": "nature",
+        "role": "region",
+        "radiusKm": 35,
+        "minZoom": 0,
+        "maxZoom": 11,
+        "summary": "Chaparral, sage scrub, and one green river thread — arid hill country that keeps what it's given, including evidence.",
+        "detail": "The 1994 case's outdoor world: the hill country along SR-76 from the Pala junction east through Pauma Valley, under the west flank of Palomar Mountain. **Not desert** — that's Anza-Borrego, a county further east — but arid chaparral and coastal sage scrub, cured gold most of the year, cut by the San Luis Rey's cottonwood-willow thread.\n\n**Ecology in one paragraph:** chamise and manzanita own the slopes, with laurel sumac, white and black sage, California buckwheat, and chaparral yucca in the openings; coast live oak holds the drainages and terraces; non-native bromes and wild oats cure to the gold that gives the county its light. Rattlesnakes, coyotes, turkey vultures, quail, mule deer; bobcats; a mountain lion is rare and an event. Fire is the landscape's other author — every slope is either recovering from a burn or waiting for one.\n\n**Climate and rhythm:** winter rains (Dec–Mar), May gray/June gloom mornings that burn off by ten, long dry summers, Santa Ana winds in fall that turn the air to glass and everyone's temper brittle. The early-90s drought years killed the marginal groves and left the hills full of dying orchards — the novel's central image growing on every third slope.\n\n**Why it matters to the case:** the arid backcountry **preserves**. Low humidity and heat mummify rather than rot; the grove gives the ME thirty years of evidence a wetter county would have eaten in a month. Quarries and gem mines (Pala's pegmatite district — tourmaline, kunzite — plus aggregate pits along the highway) mean heavy trucks and dust are unremarkable on these roads: cover traffic for anything.\n\n**The theme, in land form:** this is where the hidden county keeps things — bodies, treaties, ravines. The city decides; the backcountry holds.",
+        "fields": [
+          { "label": "Plant communities", "value": "Chamise-manzanita chaparral; coastal sage scrub; oak woodland in drainages; cottonwood-willow riparian", "estimate": true },
+          { "label": "Annual rainfall", "value": "~15 in, nearly all Dec–Mar", "estimate": true },
+          { "label": "July high / Jan low", "value": "~90°F / ~40°F", "estimate": true },
+          { "label": "Weather rhythm", "value": "May gray/June gloom; fall Santa Anas; winter rains — semi-arid, not true desert (Anza-Borrego is further east)", "estimate": true },
+          { "label": "Quarries & mines", "value": "Pala pegmatite gem district (tourmaline, kunzite); aggregate pits along SR-76 — truck traffic unremarkable", "estimate": true },
+          { "label": "Evidence preservation", "value": "Arid heat + low humidity → mummification; the land keeps what it's given", "estimate": true }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.0864, 33.121] },
+      "properties": {
+        "id": "region-city",
+        "name": "Inland North County / the city",
+        "category": "city",
+        "role": "region",
+        "radiusKm": 25,
+        "minZoom": 0,
+        "maxZoom": 11,
+        "summary": "The 1994 inland valley: avocado money thinning, recession layoffs, a growth machine with handshake smoothness — the apparatus's home range.",
+        "detail": "The novel's daylight world: the inland valley city (working name **Escondida**, modeled on Escondido) and its orbit of packing sheds, subdivisions, and county offices.\n\n**Socioeconomic sketch, 1994:** a city of roughly 110,000 caught between two economies. The old one — avocados and citrus on the slopes, packing sheds by the rail spur, water politics as civic religion — is thinning: the late-80s drought and water-rate hikes made hillside groves uneconomic, and dying orchards ring the valley like a tide line. The new one — stucco subdivisions, commuters, retail — is arriving faster than the wages that are supposed to pay for it. The early-90s recession and San Diego's aerospace layoffs are still working through the county; the labor that picks, packs, cleans, and builds is largely immigrant, largely invisible to the city that depends on it — the novel's *nobodies*, by design.\n\n**The apparatus's reach:** power in the valley is a small circle that meets twice — once in public (council, chamber, the paper's editorial board) and once for real. The DA's office decides which cases get oxygen; the developers decide which land gets water; the paper decides which questions are askable. Crane's 1994 office sits where those circles overlap. None of this is conspiracy in the movie sense — the novel's argument is that it doesn't need to be. It's weather: handshakes, routing slips, cases filed under *no prosecutorial merit*.\n\n**Texture for prose:** flip-numeral gas signs, swamp coolers, packing-shed shift whistles, AM radio call-ins about water rates, new cul-de-sacs named for the groves they replaced.",
+        "fields": [
+          { "label": "Population (1994, city)", "value": "~112,000", "estimate": true },
+          { "label": "Median household income (early 90s)", "value": "~$31,000", "estimate": true },
+          { "label": "Economy", "value": "Avocado/citrus + packing (declining), construction/retail (rising), county services; recession-era layoffs", "estimate": true },
+          { "label": "Labor", "value": "Field, packing, cleaning, construction work largely immigrant and largely invisible to the city it sustains", "estimate": true },
+          { "label": "Regular gas (CA, 1994)", "value": "~$1.15/gal", "estimate": true },
+          { "label": "The apparatus", "value": "DA's office + growth machine + the paper — power as weather, not conspiracy", "estimate": false }
+        ]
+      }
+    }
+  ]
+}

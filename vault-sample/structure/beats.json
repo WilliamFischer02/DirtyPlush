@@ -1,0 +1,74 @@
+[
+  {
+    "id": "hook",
+    "order": 1,
+    "label": "Hook",
+    "chapter": 1,
+    "chapterTitle": "Barranco Escondido",
+    "summary": "Body in the dying grove; both timelines open; the narrator starts performing.",
+    "craft": "The hook of a dual-timeline mystery has to hook twice. The 1994 thread earns attention the classic way — a body, a place with atmosphere (the dying grove, fruit rotting on the ground), a detective whose way of seeing is immediately distinct (Vega doing lividity math while Brennan prays). The 2024 frame must hook differently: not with danger but with *wrongness* — a routine consult that is a shade too well-attended, questions a shade too specific. Because the narrator is unreliable, the hook chapter also signs the contract with the reader: every 1994 scene is testimony, told by a man in a room, and the book will play fair by that rule. So plant one concrete, checkable detail in the grove scene (a time, a distance, a temperature) that will move when the scene is retold in chapter 4. The reader won't notice on first pass — that's the point. First-pass readers get a murder mystery; re-readers get a confession in progress. Both must work. End the chapter on the frame, not the case: the last image should make the reader ask not 'who killed her?' but 'why are they really talking to this old man?'"
+  },
+  {
+    "id": "inciting-incident",
+    "order": 2,
+    "label": "Inciting Incident",
+    "chapter": 2,
+    "chapterTitle": "Nobodies",
+    "summary": "The Ring's shadow surfaces; Vega finds Lover #1 and stops looking — the flaw demonstrated.",
+    "craft": "The inciting incident of this book is not the murder — it's the *pattern* behind the murder becoming visible: other women, other closed files, the first cold touch of the Ring. Craft problem: the reader must feel the institutional shape (cases about 'nobodies' dying quietly in drawers) without the detective naming it yet, or chapter 5's inversion loses its detonation. Run the discovery through texture — a clerk's reluctance, a file with pages missing, Crane's name on a routing slip — not through exposition. Meanwhile the domestic plot fires its own inciting incident: Vega detects Dana's Lover #1, is satisfied, and stops. This is the flaw the entire novel is built on, demonstrated at home before it matters at work, so stage it as a *victory* — let Vega feel clever, let the prose glow with competence — and let the reader feel a faint chill without being able to say why. In a limited-series structure this is episode two's job everywhere: widen the world, state the character flaw in action, and make the audience complicit in admiring exactly the quality that will destroy everyone."
+  },
+  {
+    "id": "first-reversal",
+    "order": 3,
+    "label": "First Reversal",
+    "chapter": 3,
+    "chapterTitle": "The Weight of the Badge",
+    "summary": "The case turns toward power; first hint the 2024 room is a hunt, not a consult.",
+    "craft": "A first reversal should redefine the question, not just complicate the answer. In 1994, the evidence stops pointing outward (drifter, jealous lover, backcountry passion killing — the staged reading) and starts pointing *up*, into the county's respectable weather: the forensic tells (moved after death, washed, held somewhere institutional) contradict the story the scene was dressed to tell. The case stops being 'who?' and becomes 'who is allowed to be asked?' Simultaneously, give the frame its first true reversal: one question in the 2024 room that could only be asked by someone hunting Lucia — Crane's ninety-second visit works as the delivery mechanism. The reader should clock it before Vega admits noticing it, which is the unreliable-narrator dividend: his *narration* notices (he records the question verbatim) while his *commentary* deflects. That gap between what Vega reports and what Vega concludes is the book's central instrument; this chapter is where you first play it openly. End with pressure applied to the partnership — Brennan reaching for the manual, Vega reaching for a lie — so the structural reversal lands as a human one."
+  },
+  {
+    "id": "midpoint-twist",
+    "order": 4,
+    "label": "Midpoint Twist",
+    "chapter": 4,
+    "chapterTitle": "The Secret Fate",
+    "summary": "Twist 1: the case was solved to Vega all along; thirty years hidden; the room is a hunt.",
+    "craft": "The midpoint of an unreliable-narrator mystery is where the narrator's game becomes the plot. Twist 1 must recategorize every prior page: Vega solved the case — identified Lucia, understood everything — by April 1994, and has spent thirty years as the truth's custodian. Executed right, this converts the whodunit into something rarer: a *why-hide-it*, and it flips the 2024 frame from wraparound to arena — the consult is a hunt, and Vega walked in knowing. Mechanics matter enormously here. Do not reveal by announcement; reveal by *catching* him — Cardenas notices the S16 canvass detail that moved between tellings (the one planted in chapter 1), and the reader realizes the flashbacks were never footage, they were testimony, curated by a man protecting someone. Then pay the fair-play debt: a tight, devastating re-read sequence (three or four beats, no more) showing what the honest version of earlier scenes looked like. The midpoint should also raise the price of everything: if he's known for thirty years, his marriage, his partner's death, his whole ruined life were *chosen* costs. From here the reader stops asking what happened and starts asking what it cost — which is the theme, arriving on schedule."
+  },
+  {
+    "id": "complication",
+    "order": 5,
+    "label": "Complication",
+    "chapter": 5,
+    "chapterTitle": "Inversion",
+    "summary": "The victims were the monsters; Lucia the wronged avenger — stained; the heirs start the clock. (Ch. 6, 'A Different Hand', extends this beat: a kill that doesn't fit.)",
+    "craft": "The complication phase must invert the moral map without releasing narrative tension — the danger after a big midpoint is drift, and the cure is to make every revelation raise stakes in the present. Chapter 5 lands the inversion: the men Lucia killed were the Ring — powerful men preying on marginalized women, shielded by Crane's apparatus — and the county's feared 'killer' was the wronged sister. Two craft obligations keep this from being a mere thesis: first, stain her — Lucia condemned an innocent man, and the book must sit in that fact long enough to hurt, or the inversion becomes a comfortable fable; second, convert history into countdown — the Ring's heirs are alive, funded, and now hunting through the 2024 frame, so the past tense becomes a ticking present. Then chapter 6 ('A Different Hand') extends the complication with the mystery's second engine: a present-day kill in the Ring's target class that doesn't fit Lucia's grammar — too cold, too doctrinal — seeding Killer #2 and cracking Vega's thirty-year certainty. That crack is the real event: the man whose flaw is stopping when satisfied discovers his settled answer has been incomplete since 1994. For the limited series, these are episodes five and six: inversion, then anomaly."
+  },
+  {
+    "id": "nadir",
+    "order": 6,
+    "label": "Nadir",
+    "chapter": 7,
+    "chapterTitle": "The Believer",
+    "summary": "Twist 2 at the bottom: the system killed Brennan; the Inheritor is revealed; Vega's silence has a body count.",
+    "craft": "The nadir must be the theme executed on the character the reader loves most. Twist 2: Brennan — the believer, the fourth-generation cop — took what he'd found up the chain in good faith, into the apparatus itself, and the system killed him for it in June 1994, then buried him with honors and a flag folded by the hands that arranged his death. Structurally this reveal has waited three years of story time and thirty of Vega's silence, so let it detonate both timelines at once: in 1994, the funeral; in 2024, Vega finally saying what he has never said aloud. In the same movement, reveal the Inheritor — Marisol's child, raised on clippings and silences, now killing with doctrine where Lucia killed with grief. The two reveals belong together because they are the same accounting: the believer and the victim's child are both bills for 1994, and Vega's thirty-year custody of the truth is a line item on each. The nadir of an unreliable-narrator novel has one extra requirement — it is where the narrator stops curating. Mark the shift in the prose itself: shorter sentences, no measurements, no philosophy. The register the reader has learned to decode as 'Vega lying' goes quiet, and the silence should be more frightening than any twist."
+  },
+  {
+    "id": "climax",
+    "order": 7,
+    "label": "Climax",
+    "chapter": 8,
+    "chapterTitle": "Letting Go",
+    "summary": "Convergence: Lover #2 revealed; Vega surrenders both secrets; the hunt and the truth collide.",
+    "craft": "The climax of this book is an act of release, not capture — which means it must be staged so that letting go is harder than holding on. Converge every line: the hunt closes on Lucia; the Inheritor forces Vega's hand; and the last private mirror shatters — Lover #2 was Brennan, so the detective's blind spot at home and his blind spot on the case are revealed as the same flaw, paying off the chapter 2 'victory' at thirty years' interest. Sequence the two surrenders deliberately: the personal secret first (Dana and Brennan — grief), then the case secret (Lucia — choice), because the reader must understand what surrender costs him before watching him do it at scale. Keep the physical climax small: no shootout can compete with a man saying two true sentences he has spent a life not saying. The 2024 room, Cardenas across the table, Crane's apparatus listening — that is the arena, and testimony is the weapon. For the limited series, resist the finale-inflation instinct; the episode's set piece is an interrogation played in real time. The theme arrives as action: truth and justice part ways in front of the reader — Crane wins in public, the truth survives in a notebook — and Vega, for the first time, lets both go."
+  },
+  {
+    "id": "resolution",
+    "order": 8,
+    "label": "Resolution",
+    "chapter": 8,
+    "chapterTitle": "Letting Go / the frame closes",
+    "summary": "Dark with a sliver: Crane undefeated, Lucia exposed, Vega emptied and free; Cardenas keeps the ledger.",
+    "craft": "The resolution's job is to set the reader's final temperature, and this book runs cold with one warm coal. Close the frame honestly: no institutional reckoning, no arrest montage. Crane remains undefeated in public; the apparatus absorbs the episode the way it has absorbed everything since 1994; Lucia is exposed and diminished, her thirty years of hiding traded for something that is not safety. Vega ends humbled and strangely light — a man who carried two secrets like organs and survived their removal; 'free in a broken world' is the target feeling, and it should read as cost, not reward. The sliver is Cardenas, and the craft here is restraint: her final act (the notebook — both versions of every story, dated, witnessed, preserved) must be small, procedural, and irreversible, a seed rather than a sunrise. Do not let her fix anything on the page. In an unreliable-narrator novel the resolution also quietly answers the meta-question — who has been receiving this testimony, and what will they do with it — so the last image should braid teller and listener: Vega's voice ending, Cardenas still writing. For the limited series, this is the final minutes of episode eight: the room empties, the file stays open, and the light is exactly one page wide."
+  }
+]
