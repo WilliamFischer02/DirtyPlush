@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+/*
+ * Dirty Plush — noir palette.
+ * Near-black surfaces, warm amber accent (the cured-gold grasses of the
+ * 1994 backcountry), muted grey-blue ink. Tokens are consumed as Tailwind
+ * classes: bg-panel, text-ink, border-edge, text-accent, etc.
+ */
+@theme {
+  --color-night: #0d0f12;      /* page background */
+  --color-panel: #15181d;      /* primary surface */
+  --color-panel-2: #1c2027;    /* raised surface / cards */
+  --color-panel-3: #242933;    /* hover / inputs */
+  --color-edge: #2c323d;       /* borders */
+  --color-ink: #d6d9de;        /* primary text */
+  --color-ink-dim: #8b919c;    /* secondary text */
+  --color-ink-faint: #5c626d;  /* tertiary text */
+  --color-accent: #d9a441;     /* amber — primary accent */
+  --color-accent-dim: #8a6a2f;
+  --color-teal: #4fa3a5;       /* secondary accent — present-day 2024 */
+  --color-rust: #b5533c;       /* danger / the case, 1994 */
+  --color-sage: #7d9471;       /* ok / flora */
+  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-serif: "Georgia", "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", "Consolas", monospace;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: var(--color-night);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Thin, unobtrusive scrollbars for long sessions */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-edge) transparent;
+}
+
+/* ---- shared component classes ---- */
+
+.btn {
+  @apply px-3 py-1.5 rounded-md text-sm border border-edge bg-panel-2 text-ink
+    hover:bg-panel-3 transition-colors cursor-pointer disabled:opacity-40
+    disabled:cursor-not-allowed;
+}
+.btn-accent {
+  @apply border-accent-dim bg-accent/10 text-accent hover:bg-accent/20;
+}
+.btn-danger {
+  @apply border-rust/60 text-rust hover:bg-rust/10;
+}
+
+.input {
+  @apply w-full px-2.5 py-1.5 rounded-md text-sm bg-panel-3 border border-edge
+    text-ink placeholder-ink-faint focus:outline-none focus:border-accent-dim;
+}
+.label {
+  @apply block text-[11px] uppercase tracking-wider text-ink-faint mb-1;
+}
+
+.card {
+  @apply bg-panel-2 border border-edge rounded-lg;
+}
+
+/* Estimate badge — every researched 1994 value carries one (see §9 of the spec) */
+.estimate-badge {
+  @apply inline-block text-[10px] uppercase tracking-wide px-1.5 py-px rounded
+    bg-rust/15 text-rust/90 border border-rust/30 align-middle;
+}
+
+/* Rendered markdown (Profile tab, event detail) */
+.prose-noir {
+  @apply text-sm leading-relaxed text-ink;
+}
+.prose-noir h1, .prose-noir h2, .prose-noir h3 {
+  @apply font-semibold text-ink mt-4 mb-2;
+  font-family: var(--font-serif);
+}
+.prose-noir h1 { @apply text-xl; }
+.prose-noir h2 { @apply text-lg; }
+.prose-noir h3 { @apply text-base text-accent; }
+.prose-noir p { @apply my-2; }
+.prose-noir ul, .prose-noir ol { @apply my-2 pl-5 list-disc; }
+.prose-noir ol { @apply list-decimal; }
+.prose-noir li { @apply my-0.5; }
+.prose-noir blockquote {
+  @apply border-l-2 border-accent-dim pl-3 my-2 text-ink-dim italic;
+}
+.prose-noir code {
+  @apply px-1 rounded bg-panel-3 text-[13px];
+  font-family: var(--font-mono);
+}
+.prose-noir a { @apply text-teal underline underline-offset-2; }
+.prose-noir hr { @apply border-edge my-4; }
+.prose-noir strong { @apply text-ink font-semibold; }
+
+/* vis-timeline dark restyle */
+.vis-timeline { border-color: var(--color-edge) !important; }
+.vis-panel.vis-bottom, .vis-panel.vis-center, .vis-panel.vis-left,
+.vis-panel.vis-right, .vis-panel.vis-top {
+  border-color: var(--color-edge) !important;
+}
+.vis-time-axis .vis-text { color: var(--color-ink-dim) !important; }
+.vis-time-axis .vis-grid.vis-minor { border-color: #1e222a !important; }
+.vis-time-axis .vis-grid.vis-major { border-color: var(--color-edge) !important; }
+.vis-labelset .vis-label {
+  color: var(--color-ink-dim) !important;
+  border-color: var(--color-edge) !important;
+}
+.vis-item {
+  border-color: var(--color-accent-dim);
+  background-color: var(--color-panel-3);
+  color: var(--color-ink);
+  border-radius: 6px;
+  font-size: 12px;
+}
+.vis-item.vis-selected {
+  border-color: var(--color-accent);
+  background-color: rgba(217, 164, 65, 0.18);
+}
+.vis-current-time { background-color: var(--color-teal) !important; }
+
+/* Leaflet dark chrome */
+.leaflet-container { background: #0d0f12; font-family: var(--font-sans); }
+.leaflet-control-layers, .leaflet-bar a {
+  background: var(--color-panel-2) !important;
+  color: var(--color-ink) !important;
+  border-color: var(--color-edge) !important;
+}
+.leaflet-control-layers-expanded {
+  background: var(--color-panel-2) !important;
+  color: var(--color-ink) !important;
+}
+.leaflet-control-attribution {
+  background: rgba(13, 15, 18, 0.7) !important;
+  color: var(--color-ink-faint) !important;
+}
+.leaflet-control-attribution a { color: var(--color-ink-dim) !important; }
+
+/* custom map pin */
+.dp-pin {
+  display: flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 9999px 9999px 9999px 2px;
+  transform: rotate(-45deg);
+  border: 2px solid rgba(13, 15, 18, 0.9);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+}
+.dp-pin > span { transform: rotate(45deg); }
+.dp-pin.selected { outline: 2px solid var(--color-accent); }
