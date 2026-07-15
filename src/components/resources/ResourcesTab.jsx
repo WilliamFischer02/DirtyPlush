@@ -12,6 +12,7 @@ import { useVault } from '../../state/VaultContext.jsx'
 import NovelHero from './NovelHero.jsx'
 import ResourceList from './ResourceList.jsx'
 import SettingsPanel from './SettingsPanel.jsx'
+import AppearancePanel from './AppearancePanel.jsx'
 
 export default function ResourcesTab() {
   const { resources, saveResources, config, saveConfig } = useVault()
@@ -74,6 +75,8 @@ export default function ResourcesTab() {
         />
 
         <SettingsPanel config={config} saveConfig={saveConfig} />
+
+        <AppearancePanel config={config} saveConfig={saveConfig} />
 
         <p className="text-xs text-ink-faint text-center pb-2">
           Folder vaults need the File System Access API (Chrome or Edge). Street View on the

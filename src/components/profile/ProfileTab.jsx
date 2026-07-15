@@ -8,12 +8,15 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useVault } from '../../state/VaultContext.jsx'
 import { useUI } from '../../state/UIContext.jsx'
+import { useConfirm, usePrompt } from '../../state/UXContext.jsx'
 import ProfileRail from './ProfileRail.jsx'
 import ProfileEditor from './ProfileEditor.jsx'
 
 export default function ProfileTab() {
   const { characters, saveCharacter, createCharacter, deleteCharacter } = useVault()
   const { profileCharacter, setProfileCharacter } = useUI()
+  const confirmDialog = useConfirm()
+  const promptText = usePrompt()
   const [dirty, setDirty] = useState(false)
 
   const selected = characters.find((c) => c.filename === profileCharacter) || null
@@ -23,28 +26,38 @@ export default function ProfileTab() {
     if (!selected && characters.length > 0) setProfileCharacter(characters[0].filename)
   }, [selected, characters, setProfileCharacter])
 
-  const confirmDiscard = useCallback(
-    () => !dirty || window.confirm('Discard unsaved changes to this profile?'),
-    [dirty],
-  )
+  const confirmDiscard = useCallback(async () => {
+    if (!dirty) return true
+    return confirmDialog({
+      title: 'Discard unsaved changes?',
+      body: 'This profile has edits that have not been saved.',
+      confirmLabel: 'Discard',
+      danger: true,
+    })
+  }, [dirty, confirmDialog])
 
-  const switchTo = useCallback((filename) => {
+  const switchTo = useCallback(async (filename) => {
     if (filename === profileCharacter) return
-    if (!confirmDiscard()) return
+    if (!(await confirmDiscard())) return
     setProfileCharacter(filename)
   }, [profileCharacter, confirmDiscard, setProfileCharacter])
 
   const handleCreate = useCallback(async () => {
-    if (!confirmDiscard()) return
-    const name = window.prompt('Name for the new character:')
-    if (!name || !name.trim()) return
+    if (!(await confirmDiscard())) return
+    const name = await promptText({
+      title: 'New character',
+      body: 'A new note is created in characters/ with this name.',
+      placeholder: 'e.g. Deputy Chief Alvarez',
+      confirmLabel: 'Create',
+    })
+    if (!name) return
     try {
-      const filename = await createCharacter(name.trim())
+      const filename = await createCharacter(name)
       setProfileCharacter(filename)
     } catch (err) {
       console.error('Could not create character', err)
     }
-  }, [confirmDiscard, createCharacter, setProfileCharacter])
+  }, [confirmDiscard, promptText, createCharacter, setProfileCharacter])
 
   const handleDelete = useCallback(async (filename) => {
     const idx = characters.findIndex((c) => c.filename === filename)

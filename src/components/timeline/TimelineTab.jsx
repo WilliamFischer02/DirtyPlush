@@ -15,6 +15,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { DataSet, Timeline } from 'vis-timeline/standalone'
 import 'vis-timeline/styles/vis-timeline-graph2d.min.css'
 import { useVault } from '../../state/VaultContext.jsx'
+import { useConfirm } from '../../state/UXContext.jsx'
 import {
   buildGroups, eventsToItems, makeEventId, nearestGroup, presetRange, toISODate,
 } from './timelineUtils.js'
@@ -42,6 +43,7 @@ const TIMELINE_CSS = `
 
 export default function TimelineTab() {
   const { events, saveEvents, beats, saveBeats } = useVault()
+  const confirmDialog = useConfirm()
 
   const containerRef = useRef(null)
   const timelineRef = useRef(null)
@@ -68,16 +70,22 @@ export default function TimelineTab() {
     await saveEvents(next)
   }, [saveEvents])
 
-  const removeViaTimeline = useCallback((item, callback) => {
+  const removeViaTimeline = useCallback(async (item, callback) => {
     const evt = eventsRef.current.find((e) => e.id === item.id)
     const name = evt?.title || 'this event'
-    if (window.confirm(`Delete "${name}"? This removes it from timeline/events.json.`)) {
+    const ok = await confirmDialog({
+      title: `Delete "${name}"?`,
+      body: 'This removes the event from timeline/events.json.',
+      confirmLabel: 'Delete',
+      danger: true,
+    })
+    if (ok) {
       callback(item)
       saveEvents(eventsRef.current.filter((e) => e.id !== item.id))
     } else {
       callback(null)
     }
-  }, [saveEvents])
+  }, [saveEvents, confirmDialog])
 
   /* ---------- timeline lifecycle (create once, destroy on unmount) ---------- */
 
@@ -197,10 +205,16 @@ export default function TimelineTab() {
   const deleteOverlayEvent = useCallback(async (id) => {
     const evt = eventsRef.current.find((e) => e.id === id)
     const name = evt?.title || 'this event'
-    if (!window.confirm(`Delete "${name}"? This removes it from timeline/events.json.`)) return
+    const ok = await confirmDialog({
+      title: `Delete "${name}"?`,
+      body: 'This removes the event from timeline/events.json.',
+      confirmLabel: 'Delete',
+      danger: true,
+    })
+    if (!ok) return
     await saveEvents(eventsRef.current.filter((e) => e.id !== id))
     setOverlay(null)
-  }, [saveEvents])
+  }, [saveEvents, confirmDialog])
 
   const assignEventToBeat = useCallback(async (eventId, beatId) => {
     await saveEvents(eventsRef.current.map((e) => (

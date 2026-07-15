@@ -11,6 +11,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { useVault } from '../../state/VaultContext.jsx'
+import { useConfirm, useToast } from '../../state/UXContext.jsx'
+import { getAppearance } from '../../lib/appearance.js'
 import {
   CATEGORY_GLYPHS, TILE_LAYERS, categoryColor, distanceKm, draftFromFeature,
   featureFromDraft, featureId, featureLatLng, isPin, matchingRegions,
@@ -37,8 +39,13 @@ function pinIcon(category, selected) {
   })
 }
 
+// appearance layer id → TILE_LAYERS display name
+const LAYER_BY_ID = { satellite: 'Satellite', topo: 'Topographic', street: 'Street' }
+
 export default function MapTab() {
-  const { locations, saveLocations, config } = useVault()
+  const { locations, saveLocations, config, saveConfig } = useVault()
+  const confirmDialog = useConfirm()
+  const toast = useToast()
   const apiKey = (config?.google_maps_api_key || '').trim()
 
   const containerRef = useRef(null)
@@ -60,6 +67,47 @@ export default function MapTab() {
   modeRef.current = mode
   const pinsRef = useRef(pins)
   pinsRef.current = pins
+  const configRef = useRef(config)
+  configRef.current = config
+  const saveConfigRef = useRef(saveConfig)
+  saveConfigRef.current = saveConfig
+
+  // Home view: author-saved center/zoom in config.options.map_home
+  const goHome = useCallback(() => {
+    const map = mapRef.current
+    const home = configRef.current?.options?.map_home
+    if (!map) return
+    if (home && Number.isFinite(home.lat) && Number.isFinite(home.lng) && Number.isFinite(home.zoom)) {
+      map.flyTo([home.lat, home.lng], home.zoom, { duration: 0.6 })
+    } else if (pinsRef.current.length > 0) {
+      map.fitBounds(L.latLngBounds(pinsRef.current.map((f) => featureLatLng(f))), {
+        padding: [48, 48], maxZoom: 13,
+      })
+    }
+  }, [])
+
+  const setHome = useCallback(async () => {
+    const map = mapRef.current
+    if (!map) return
+    const c = map.getCenter()
+    const cfg = configRef.current || {}
+    await saveConfigRef.current({
+      ...cfg,
+      options: {
+        ...(cfg.options || {}),
+        map_home: {
+          lat: Number(c.lat.toFixed(5)),
+          lng: Number(c.lng.toFixed(5)),
+          zoom: map.getZoom(),
+        },
+      },
+    })
+    toast('Saved this view as the map home', 'success')
+  }, [toast])
+  const goHomeRef = useRef(goHome)
+  goHomeRef.current = goHome
+  const setHomeRef = useRef(setHome)
+  setHomeRef.current = setHome
 
   /* ---------- map lifecycle ---------- */
 
@@ -69,14 +117,38 @@ export default function MapTab() {
 
     const baseLayers = {}
     for (const t of TILE_LAYERS) baseLayers[t.name] = L.tileLayer(t.url, t.options)
-    baseLayers.Satellite.addTo(map) // default per spec
+    // Author-configurable default layer (Resources → Settings → Appearance)
+    const defaultLayerName = LAYER_BY_ID[getAppearance(configRef.current).map_layer] || 'Satellite'
+    ;(baseLayers[defaultLayerName] || baseLayers.Satellite).addTo(map)
     L.control.layers(baseLayers, null, { position: 'topright' }).addTo(map)
+
+    // Home-view control under the zoom buttons: ⌂ go home, ◎ save home
+    const homeControl = L.control({ position: 'topleft' })
+    homeControl.onAdd = () => {
+      const div = L.DomUtil.create('div', 'leaflet-bar')
+      const go = L.DomUtil.create('a', '', div)
+      go.href = '#'
+      go.innerHTML = '⌂'
+      go.title = 'Go to the saved home view (falls back to fitting all pins)'
+      const set = L.DomUtil.create('a', '', div)
+      set.href = '#'
+      set.innerHTML = '◎'
+      set.title = 'Save the current view as home (persists to the vault config)'
+      L.DomEvent.on(go, 'click', (e) => { L.DomEvent.stop(e); goHomeRef.current() })
+      L.DomEvent.on(set, 'click', (e) => { L.DomEvent.stop(e); setHomeRef.current() })
+      L.DomEvent.disableClickPropagation(div)
+      return div
+    }
+    homeControl.addTo(map)
 
     markerLayerRef.current = L.layerGroup().addTo(map)
 
-    // Initial view fitted to the pins
+    // Initial view: saved home first, then fit-to-pins, then the fallback
+    const home = configRef.current?.options?.map_home
     const startPins = pinsRef.current
-    if (startPins.length > 0) {
+    if (home && Number.isFinite(home.lat) && Number.isFinite(home.lng) && Number.isFinite(home.zoom)) {
+      map.setView([home.lat, home.lng], home.zoom)
+    } else if (startPins.length > 0) {
       map.fitBounds(L.latLngBounds(startPins.map((f) => featureLatLng(f))), {
         padding: [48, 48],
         maxZoom: 13,
@@ -237,14 +309,20 @@ export default function MapTab() {
 
   const deleteFeature = useCallback(async (feature) => {
     const name = feature.properties?.name || 'this location'
-    if (!window.confirm(`Delete "${name}"? This removes it from map/locations.geojson.`)) return
+    const ok = await confirmDialog({
+      title: `Delete "${name}"?`,
+      body: 'This removes the location from map/locations.geojson.',
+      confirmLabel: 'Delete',
+      danger: true,
+    })
+    if (!ok) return
     await saveLocations({
       ...locations,
       type: 'FeatureCollection',
       features: features.filter((f) => f !== feature),
     })
     setSelectedId((id) => (id === featureId(feature) ? null : id))
-  }, [features, locations, saveLocations])
+  }, [features, locations, saveLocations, confirmDialog])
 
   const fitToPins = useCallback(() => {
     const map = mapRef.current

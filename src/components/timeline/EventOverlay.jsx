@@ -7,6 +7,7 @@
  */
 import { useMemo, useRef, useState } from 'react'
 import { renderMarkdown } from '../../lib/markdown.js'
+import { useConfirm } from '../../state/UXContext.jsx'
 import {
   EVENT_COLORS, GROUPS, PRIORITIES, blankEvent, clampWeight, safeColor,
 } from './timelineUtils.js'
@@ -15,6 +16,7 @@ const DATE_STYLE = { colorScheme: 'dark' } // dark calendar glyphs on date input
 
 export default function EventOverlay({ event, seed, beats, onSave, onDelete, onClose }) {
   const isNew = !event
+  const confirmDialog = useConfirm()
   // Baseline captured once so "dirty" survives re-renders of the parent
   const initialRef = useRef(null)
   if (initialRef.current === null) initialRef.current = event ? { ...event } : blankEvent(seed)
@@ -46,8 +48,16 @@ export default function EventOverlay({ event, seed, beats, onSave, onDelete, onC
   const preview = useMemo(() => renderMarkdown(draft.detail || ''), [draft.detail])
   const color = safeColor(draft.color, draft.group)
 
-  const requestClose = () => {
-    if (dirty && !window.confirm('Discard unsaved changes to this event?')) return
+  const requestClose = async () => {
+    if (dirty) {
+      const ok = await confirmDialog({
+        title: 'Discard unsaved changes?',
+        body: 'This event has edits that have not been saved.',
+        confirmLabel: 'Discard',
+        danger: true,
+      })
+      if (!ok) return
+    }
     onClose()
   }
 
@@ -246,9 +256,24 @@ export default function EventOverlay({ event, seed, beats, onSave, onDelete, onC
         {/* footer */}
         <div className="shrink-0 flex items-center gap-3 px-4 py-3 border-t border-edge bg-panel">
           {!isNew && (
-            <button className="btn btn-danger" onClick={() => onDelete(event.id)}>
-              Delete event
-            </button>
+            <>
+              <button className="btn btn-danger" onClick={() => onDelete(event.id)}>
+                Delete event
+              </button>
+              <button
+                className="btn"
+                title="Save a copy of this event (including any unsaved edits here) as a new event"
+                onClick={() => onSave({
+                  ...draft,
+                  id: '',
+                  title: `${(draft.title || 'Untitled event').trim()} (copy)`,
+                  weight: clampWeight(draft.weight),
+                  color,
+                })}
+              >
+                Duplicate
+              </button>
+            </>
           )}
           {error && <span className="text-sm text-rust">{error}</span>}
           {dirty && !error && <span className="text-xs text-ink-faint">unsaved changes</span>}

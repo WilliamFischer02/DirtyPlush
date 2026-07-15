@@ -8,7 +8,8 @@
  * is editable and persists via saveBeats.
  */
 import { useEffect, useMemo, useState } from 'react'
-import { renderMarkdown } from '../../lib/markdown.js'
+import { renderMarkdown, slugify } from '../../lib/markdown.js'
+import { useConfirm } from '../../state/UXContext.jsx'
 import { safeColor } from './timelineUtils.js'
 
 const ARC_RISE = 36 // px the track climbs toward the climax
@@ -55,6 +56,7 @@ function ArcCurve({ n }) {
 }
 
 export default function StructurePanel({ beats, events, saveBeats, onOpenEvent, onAssign }) {
+  const confirmDialog = useConfirm()
   const sorted = useMemo(
     () => [...beats].sort((a, b) => (a.order || 0) - (b.order || 0)),
     [beats],
@@ -140,6 +142,54 @@ export default function StructurePanel({ beats, events, saveBeats, onOpenEvent, 
     }
   }
 
+  const addBeat = async () => {
+    const ids = new Set(beats.map((b) => b.id))
+    let id = slugify('new beat')
+    let i = 2
+    while (ids.has(id)) id = `new-beat-${i++}`
+    const maxOrder = beats.reduce((m, b) => Math.max(m, b.order || 0), 0)
+    const beat = {
+      id, order: maxOrder + 1, label: 'New beat',
+      chapter: sorted.length + 1, chapterTitle: '', summary: '', craft: '',
+    }
+    await saveBeats([...beats, beat])
+    setActiveId(id)
+    setEditDraft({
+      id, label: beat.label, chapter: beat.chapter, chapterTitle: '', summary: '', craft: '',
+    })
+  }
+
+  /** Swap the active beat with its neighbor on the track (dir = -1 | 1). */
+  const moveBeat = async (dir) => {
+    if (!active) return
+    const idx = sorted.findIndex((b) => b.id === active.id)
+    const swap = sorted[idx + dir]
+    if (!swap) return
+    // Normalize orders to 1..n first so legacy duplicate orders can't stick
+    const orderById = new Map(sorted.map((b, i) => [b.id, i + 1]))
+    orderById.set(active.id, idx + dir + 1)
+    orderById.set(swap.id, idx + 1)
+    await saveBeats(beats.map((b) => ({ ...b, order: orderById.get(b.id) ?? b.order })))
+  }
+
+  const deleteBeat = async () => {
+    if (!active) return
+    const assigned = eventsByBeat.get(active.id) || []
+    const ok = await confirmDialog({
+      title: `Delete the "${active.label}" beat?`,
+      body: assigned.length
+        ? `Its ${assigned.length} assigned event(s) become unassigned. The events themselves are kept.`
+        : 'The beat is removed from structure/beats.json.',
+      confirmLabel: 'Delete beat',
+      danger: true,
+    })
+    if (!ok) return
+    for (const e of assigned) await onAssign(e.id, '')
+    await saveBeats(beats.filter((b) => b.id !== active.id))
+    setEditDraft(null)
+    setActiveId(null)
+  }
+
   const n = sorted.length
 
   return (
@@ -153,6 +203,13 @@ export default function StructurePanel({ beats, events, saveBeats, onOpenEvent, 
         <span className="ml-auto text-[11px] text-ink-faint">
           {unassigned.length} unassigned event{unassigned.length === 1 ? '' : 's'}
         </span>
+        <button
+          className="btn text-xs !py-0.5"
+          title="Add a new beat at the end of the track"
+          onClick={addBeat}
+        >
+          + Add beat
+        </button>
       </div>
 
       {/* beat track */}
@@ -344,6 +401,9 @@ export default function StructurePanel({ beats, events, saveBeats, onOpenEvent, 
               <button className="btn" onClick={() => setEditDraft(null)} disabled={saving}>
                 Cancel
               </button>
+              <button className="btn btn-danger ml-auto" onClick={deleteBeat} disabled={saving}>
+                Delete beat
+              </button>
             </div>
           </div>
         ) : (
@@ -365,7 +425,25 @@ export default function StructurePanel({ beats, events, saveBeats, onOpenEvent, 
                   <p className="mt-0.5 text-sm italic text-ink-dim">{active.summary}</p>
                 ) : null}
               </div>
-              <button className="btn shrink-0" onClick={startEdit}>Edit beat</button>
+              <div className="shrink-0 flex gap-1">
+                <button
+                  className="btn !px-2"
+                  title="Move this beat earlier on the track"
+                  disabled={sorted[0]?.id === active.id}
+                  onClick={() => moveBeat(-1)}
+                >
+                  ◀
+                </button>
+                <button
+                  className="btn !px-2"
+                  title="Move this beat later on the track"
+                  disabled={sorted[sorted.length - 1]?.id === active.id}
+                  onClick={() => moveBeat(1)}
+                >
+                  ▶
+                </button>
+                <button className="btn" onClick={startEdit}>Edit beat</button>
+              </div>
             </div>
             {active.craft ? (
               <div

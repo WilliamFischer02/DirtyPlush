@@ -8,6 +8,7 @@
 import { useCallback } from 'react'
 import { useVault } from '../../state/VaultContext.jsx'
 import { useUI } from '../../state/UIContext.jsx'
+import { usePrompt } from '../../state/UXContext.jsx'
 import RelationshipGraph from './RelationshipGraph.jsx'
 import CharacterList from './CharacterList.jsx'
 import ThemesPanel from './ThemesPanel.jsx'
@@ -19,6 +20,7 @@ export default function CharactersTab() {
     arcs, saveArcs, config, saveConfig,
   } = useVault()
   const { openProfile } = useUI()
+  const promptText = usePrompt()
 
   // Accepts a filename ('ray-vega.md') or a frontmatter name ('Lucia Serrano')
   const open = useCallback(
@@ -27,11 +29,16 @@ export default function CharactersTab() {
   )
 
   const handleCreate = useCallback(async () => {
-    const name = window.prompt('Name for the new character:')
-    if (!name || !name.trim()) return
-    const filename = await createCharacter(name.trim())
+    const name = await promptText({
+      title: 'New character',
+      body: 'A new note is created in characters/ with this name.',
+      placeholder: 'e.g. Deputy Chief Alvarez',
+      confirmLabel: 'Create',
+    })
+    if (!name) return
+    const filename = await createCharacter(name)
     openProfile(filename, characters)
-  }, [createCharacter, openProfile, characters])
+  }, [promptText, createCharacter, openProfile, characters])
 
   return (
     <div className="h-full overflow-y-auto">

@@ -11,6 +11,7 @@
  */
 import { useState } from 'react'
 import ResourceEditor, { RESOURCE_CATEGORIES } from './ResourceEditor.jsx'
+import { useConfirm } from '../../state/UXContext.jsx'
 
 // Only navigable link schemes become clickable; anything else (javascript:,
 // data:, …) renders as plain text — resources.json is hand-editable.
@@ -66,6 +67,7 @@ export default function ResourceList({
 }) {
   const [draft, setDraft] = useState(null)
   const [saving, setSaving] = useState(false)
+  const confirmDialog = useConfirm()
 
   const startAdd = () =>
     setDraft({ isNew: true, title: '', url: '', note: '', category: defaultCategory })
@@ -99,8 +101,13 @@ export default function ResourceList({
   }
 
   const remove = async (item) => {
-    if (!window.confirm(`Delete "${item.title || 'this entry'}" from the list?`)) return
-    await onDelete(item._index)
+    const ok = await confirmDialog({
+      title: `Delete "${item.title || 'this entry'}"?`,
+      body: 'This removes the link from resources/resources.json.',
+      confirmLabel: 'Delete',
+      danger: true,
+    })
+    if (ok) await onDelete(item._index)
   }
 
   const rows = (
