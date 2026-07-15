@@ -11,7 +11,9 @@ import ResourceList from './ResourceList.jsx'
 
 export default function NovelHero({ config, items, onAdd, onUpdate, onDelete }) {
   const onedriveUrl = (config?.novel?.onedrive_url || '').trim()
-  const webUrl = (config?.novel?.web_url || '').trim()
+  // Only an http(s) URL becomes a live link — the config file is hand-editable.
+  const rawWebUrl = (config?.novel?.web_url || '').trim()
+  const webUrl = /^https?:/i.test(rawWebUrl) ? rawWebUrl : ''
 
   const openDesktop = () => {
     if (!onedriveUrl) return

@@ -12,18 +12,23 @@
 import { useState } from 'react'
 import ResourceEditor, { RESOURCE_CATEGORIES } from './ResourceEditor.jsx'
 
+// Only navigable link schemes become clickable; anything else (javascript:,
+// data:, …) renders as plain text — resources.json is hand-editable.
+const SAFE_URL_RE = /^(https?:|mailto:|ms-word:)/i
+
 function ResourceRow({ item, onEdit, onDelete }) {
+  const safeUrl = item.url && SAFE_URL_RE.test(item.url.trim()) ? item.url.trim() : ''
   return (
     <div className="group rounded-md border border-edge bg-panel/60 px-3 py-2.5">
       <div className="flex items-start gap-2">
         <div className="min-w-0 flex-1">
-          {item.url ? (
+          {safeUrl ? (
             <a
-              href={item.url}
+              href={safeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-ink hover:text-accent transition-colors break-words"
-              title={item.url}
+              title={safeUrl}
             >
               {item.title || item.url}
               <span className="text-ink-faint ml-1" aria-hidden="true">↗</span>
