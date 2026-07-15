@@ -1,0 +1,32 @@
+{
+  "name": "dirty-plush-writers-panel",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Author's command center for the novel Dirty Plush — map, timeline, characters, profiles, resources. Reads/writes a plain-file Obsidian vault.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "dompurify": "^3.2.4",
+    "idb-keyval": "^6.2.2",
+    "js-yaml": "^4.1.0",
+    "jszip": "^3.10.1",
+    "leaflet": "^1.9.4",
+    "marked": "^15.0.7",
+    "papaparse": "^5.5.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-force-graph-2d": "^1.27.1",
+    "vis-data": "^8.0.1",
+    "vis-timeline": "^8.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.8",
+    "@vitejs/plugin-react": "^4.5.0",
+    "tailwindcss": "^4.1.8",
+    "vite": "^6.3.5"
+  }
+}

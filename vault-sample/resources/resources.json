@@ -1,0 +1,86 @@
+[
+  {
+    "title": "Leticia Hernandez case — Oceanside PD cold case",
+    "url": "https://www.solvethecase.org/case/1989-7/leticia-hernandez",
+    "note": "The geographic seed for the grove: abducted in Oceanside (Dec 1989), remains found March 1991 in a brush-filled canyon off Pala–Temecula Road (Highway S16) near the Pala reservation. Official Oceanside PD unsolved-case page. Real, unsolved, and owed respect — the novel borrows the geography and the county's silence, not the person.",
+    "category": "case-file"
+  },
+  {
+    "title": "San Diego serial murders (1985–1990) — Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/San_Diego_serial_murders",
+    "note": "The factual anchor for the inversion and the 'nobodies' theme: dozens of women — many sex workers, many marginalized — killed in and around San Diego; a belated task force; documented institutional failure; most cases never resolved as one killer's work. Read for how a county files certain victims, which is the novel's whole argument.",
+    "category": "case-file"
+  },
+  {
+    "title": "Escondido, California — Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Escondido,_California",
+    "note": "The model city for 'Escondida' (the name means 'hidden' — keep the meaning even if you rename). Useful for 1990s population, the avocado/citrus economy, geography of the inland valley, and distances to Pala/Pauma along SR-76.",
+    "category": "case-file"
+  },
+  {
+    "title": "Bureau of Justice Statistics (DOJ)",
+    "url": "https://bjs.ojp.gov/",
+    "note": "Period policing and crime data for 1994 verisimilitude — search the site for 'Criminal Victimization 1994' and 'Law Enforcement Management and Administrative Statistics' (LEMAS, 1993). Linked to the homepage because BJS deep links change; use the site search.",
+    "category": "case-file"
+  },
+  {
+    "title": "NYT archive search — San Diego County, 1994",
+    "url": "https://www.nytimes.com/search?query=San%20Diego%20County%201994%20homicide",
+    "note": "This is a SEARCH LINK, not a specific article — a starting point for period reporting on North County crime, the early-90s recession, water politics, and avocado economics. The archive (paywalled) is the best single source for how the era talked about itself.",
+    "category": "case-file"
+  },
+  {
+    "title": "John Truby — The Anatomy of Story",
+    "url": "https://us.macmillan.com/books/9780865479937/theanatomyofstory/",
+    "note": "The moral-argument school of structure — exactly right for a book whose theme ('truth and justice are not the same thing') must be argued through character choices, not stated. Truby's 'web of characters' chapter maps cleanly onto Vega/Brennan/Lucia/Crane as four positions on one theme.",
+    "category": "writing"
+  },
+  {
+    "title": "John Yorke — Into the Woods: A Five-Act Journey Into Story",
+    "url": "https://www.goodreads.com/book/show/17593915-into-the-woods",
+    "note": "The best structure book written from inside television — Yorke ran UK drama, and his five-act logic is the natural bridge from the novel's 8 beats to an 8-episode limited series. His fractal principle (acts within scenes within episodes) is the tool for making each interrogation session a complete shape.",
+    "category": "writing"
+  },
+  {
+    "title": "Jessica Brody — Save the Cat! Writes a Novel",
+    "url": "https://www.penguinrandomhouse.com/books/554039/save-the-cat-writes-a-novel-by-jessica-brody/",
+    "note": "The 15-beat sheet adapted for novelists. Use as a cross-check, not a template: map the 8-chapter spine against her beats to find soft spots (our 'Fun and Games' equivalent is the ch. 2–3 investigation; our 'Dark Night' is ch. 7). Her 'Whydunit' genre chapter is directly on point.",
+    "category": "writing"
+  },
+  {
+    "title": "Unreliable narrator — Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Unreliable_narrator",
+    "note": "Taxonomy and canon examples. Vega is the rare deliberate unreliable narrator — not deluded but curating — which puts him closer to Ford Madox Ford's Dowell or Ishiguro's Stevens than to the twist-narrators. The fair-play discipline (reader gets the evidence, narrator supplies the spin) is the craft standard to hold.",
+    "category": "writing"
+  },
+  {
+    "title": "Frame story — Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Frame_story",
+    "note": "The 2024 interrogation is a frame narrative whose frame is itself a plot (the hunt). Survey of how frames create meaning — and the key structural question for ch. 8: what happens when the frame and the framed story collide in real time.",
+    "category": "writing"
+  },
+  {
+    "title": "Nonlinear narrative — Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Nonlinear_narrative",
+    "note": "Dual-timeline mechanics: when to alternate at chapter level vs scene level (the novel tightens from chapter-level braiding to scene-level braiding as it accelerates into the nadir), and how revelation order — not event order — carries a mystery.",
+    "category": "writing"
+  },
+  {
+    "title": "Detective fiction — Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Detective_fiction",
+    "note": "The Dupin/Holmes lineage Vega descends from — the ratiocinative detective — and the hardboiled counter-tradition the setting descends from. The novel's game is putting a Dupin mind inside a Chandler county and letting the county win.",
+    "category": "writing"
+  },
+  {
+    "title": "Film adaptation — Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Film_adaptation",
+    "note": "Overview of novel-to-screen adaptation and its fidelity debates. For the 8-episode plan, the working rule: adapt the revelation order, not the prose — the S16 canvass catch, for instance, is a novel trick that must become an actable beat (Cardenas's notebook) on screen.",
+    "category": "writing"
+  },
+  {
+    "title": "Dirty Plush — the manuscript",
+    "url": "",
+    "note": "The working draft lives outside the vault. Set novel.onedrive_url (ms-word launcher) and/or novel.web_url in writers-panel-config.json to wire this entry to your manuscript; the app runs fine with both blank.",
+    "category": "novel"
+  }
+]
