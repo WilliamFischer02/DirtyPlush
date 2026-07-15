@@ -74,7 +74,14 @@ water killing the groves, the half-life of his own marriage.
 
 - OPEN: exactly what Vega does with the drug use in 2024 — maintenance,
   penance, or bait?
-- OPEN: does he ever say Lucia's name aloud in the room, or does Cardenas
-  say it first?
+- OPEN: does he ever say Lucia's name aloud in the room, or does
+  [[Det. Sofia Cardenas|Cardenas]] say it first?
 - OPEN: how much of the ch. 1 grove scene is already a performance —
   seed one falsifiable detail there and pay it off in ch. 4.
+
+## Web of lies (quick links)
+
+The two people he reads wrong are the two closest to him:
+[[Det. Jack Brennan|Brennan]] (the partner he never suspects) and
+[[Dana Vega|Dana]] (the wife he half-reads and files away). The two he
+reads right are strangers: [[Lucia Serrano]] and [[Marisol Serrano]].

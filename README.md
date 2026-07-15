@@ -50,7 +50,16 @@ All of these are **off by default, and the app fully works without them**. Each 
 
 **OneDrive manuscript links.** The novel itself lives in Word/OneDrive, outside the vault. In **Resources → Settings** you can set two URLs: one that the "Open in Word (desktop)" button hands to installed Word via the `ms-word:` protocol, and a web fallback that opens the OneDrive editor in a new tab. To get a link: open your document on onedrive.live.com (or in Word), choose **Share → Copy link**, and paste it in. Until they're set, the buttons stay disabled with a pointer to Settings.
 
-**Microsoft Graph (planned).** A future upgrade may sign in to Microsoft to list your case-file documents automatically. Today the case-file list is simply the `resources/resources.json` manifest — fully editable in the Resources tab, which is honest, simple, and yours.
+**Microsoft Graph — live OneDrive folder.** The Resources tab can list a OneDrive folder live (read-only), alongside the editable manifest. It needs a free Azure "app registration" — a five-minute, one-time setup:
+
+1. Go to [portal.azure.com](https://portal.azure.com) → search **App registrations** → **New registration**.
+2. Name it anything (e.g. *Dirty Plush Panel*). Under *Supported account types* pick **Personal Microsoft accounts only** (that's where personal OneDrive lives).
+3. Under *Redirect URI*, choose platform **Single-page application (SPA)** and enter `http://localhost:5173`. After you deploy, come back and add your deployed address (e.g. `https://your-app.vercel.app`) as a second SPA redirect URI.
+4. Register, then copy the **Application (client) ID** from the overview page.
+5. In OneDrive, right-click your case-file folder → **Share → Copy link**.
+6. Paste both — the client ID and the folder link — under **Resources → Settings → Microsoft Graph**, set the account type to *Personal*, and save. Then click **Sign in to Microsoft** on the Live OneDrive folder panel.
+
+No secret is ever stored; sign-in is Microsoft's own popup (PKCE), the app asks only for read access (`Files.Read.All`), and the session lives in your browser tab. Without the config, the panel simply explains how to turn it on.
 
 ## Making it yours
 
@@ -58,10 +67,13 @@ Under **Resources → Appearance** you can change the accent color (presets or a
 
 A few quality-of-life features worth knowing:
 
+- **Ctrl+K / ⌘K opens the command palette** — one search box over every character, event, place, beat, and link in the vault. Enter jumps straight there: characters open in Profile, events open their full editor on the Timeline, places select and fly to their pin on the Map.
+- **Obsidian `[[wikilinks]]` are live.** Write `[[Lucia Serrano]]` (or `[[Det. Jack Brennan|Brennan]]`) in any note body, event detail, location note, or beat craft text — in preview it becomes a click-through to that character's profile, exactly like in Obsidian.
 - **Keys 1–5** switch tabs from anywhere (as long as you're not typing in a field).
+- The timeline toolbar has a **filter box** — type a word and only matching events stay on the tracks.
 - On the map, **◎** saves your current position and zoom as the *home view* — the map opens there from then on — and **⌂** flies back to it.
 - Timeline events have a **Duplicate** button (great for recurring beats), and the structure track supports adding, deleting, and reordering beats with the ◀ ▶ controls.
-- Every destructive action asks first in a proper dialog, and every save is confirmed with a quiet toast naming the exact file it wrote.
+- Every destructive action asks first in a proper dialog, every save is confirmed with a quiet toast naming the exact file it wrote, and closing the tab with unsaved edits warns you first.
 
 ## The data model
 

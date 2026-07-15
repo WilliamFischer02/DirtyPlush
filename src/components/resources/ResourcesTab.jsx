@@ -13,6 +13,7 @@ import NovelHero from './NovelHero.jsx'
 import ResourceList from './ResourceList.jsx'
 import SettingsPanel from './SettingsPanel.jsx'
 import AppearancePanel from './AppearancePanel.jsx'
+import LiveFolderPanel from './LiveFolderPanel.jsx'
 
 export default function ResourcesTab() {
   const { resources, saveResources, config, saveConfig } = useVault()
@@ -62,6 +63,8 @@ export default function ResourcesTab() {
           onUpdate={updateResource}
           onDelete={deleteResource}
         />
+
+        <LiveFolderPanel config={config} />
 
         <ResourceList
           title="Writing resources"

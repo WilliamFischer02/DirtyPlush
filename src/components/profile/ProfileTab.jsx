@@ -26,6 +26,17 @@ export default function ProfileTab() {
     if (!selected && characters.length > 0) setProfileCharacter(characters[0].filename)
   }, [selected, characters, setProfileCharacter])
 
+  // Leaving the page with unsaved profile edits asks first
+  useEffect(() => {
+    if (!dirty) return undefined
+    const onBeforeUnload = (e) => {
+      e.preventDefault()
+      e.returnValue = ''
+    }
+    window.addEventListener('beforeunload', onBeforeUnload)
+    return () => window.removeEventListener('beforeunload', onBeforeUnload)
+  }, [dirty])
+
   const confirmDiscard = useCallback(async () => {
     if (!dirty) return true
     return confirmDialog({

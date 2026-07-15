@@ -11,6 +11,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { useVault } from '../../state/VaultContext.jsx'
+import { useUI } from '../../state/UIContext.jsx'
 import { useConfirm, useToast } from '../../state/UXContext.jsx'
 import { getAppearance } from '../../lib/appearance.js'
 import {
@@ -44,6 +45,7 @@ const LAYER_BY_ID = { satellite: 'Satellite', topo: 'Topographic', street: 'Stre
 
 export default function MapTab() {
   const { locations, saveLocations, config, saveConfig } = useVault()
+  const { pendingLocation, setPendingLocation } = useUI()
   const confirmDialog = useConfirm()
   const toast = useToast()
   const apiKey = (config?.google_maps_api_key || '').trim()
@@ -108,6 +110,19 @@ export default function MapTab() {
   goHomeRef.current = goHome
   const setHomeRef = useRef(setHome)
   setHomeRef.current = setHome
+
+  // Deep link from the command palette: select the pin and fly to it
+  useEffect(() => {
+    if (!pendingLocation || !mapRef.current) return
+    const feature = pins.find((f) => featureId(f) === pendingLocation)
+    if (feature) {
+      setSelectedId(pendingLocation)
+      setMode('view')
+      const z = Math.max(mapRef.current.getZoom(), 13)
+      mapRef.current.flyTo(featureLatLng(feature), z, { duration: 0.6 })
+    }
+    setPendingLocation(null)
+  }, [pendingLocation, pins, setPendingLocation])
 
   /* ---------- map lifecycle ---------- */
 

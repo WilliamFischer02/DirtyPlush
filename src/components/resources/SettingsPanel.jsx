@@ -11,6 +11,9 @@ const fromConfig = (config) => ({
   onedriveUrl: config?.novel?.onedrive_url || '',
   webUrl: config?.novel?.web_url || '',
   mapsKey: config?.google_maps_api_key || '',
+  graphClientId: config?.microsoft_graph?.client_id || '',
+  graphTenant: config?.microsoft_graph?.tenant || 'consumers',
+  graphFolderUrl: config?.microsoft_graph?.folder_share_url || '',
 })
 
 export default function SettingsPanel({ config, saveConfig }) {
@@ -45,6 +48,12 @@ export default function SettingsPanel({ config, saveConfig }) {
           web_url: draft.webUrl.trim(),
         },
         google_maps_api_key: draft.mapsKey.trim(),
+        microsoft_graph: {
+          ...(config?.microsoft_graph || {}),
+          client_id: draft.graphClientId.trim(),
+          tenant: draft.graphTenant,
+          folder_share_url: draft.graphFolderUrl.trim(),
+        },
       })
       setDirty(false)
       setSavedFlash(true)
@@ -123,18 +132,57 @@ export default function SettingsPanel({ config, saveConfig }) {
           </p>
         </div>
 
+        <div className="border-t border-edge pt-3 space-y-3">
+          <div>
+            <span className="label">Microsoft Graph — live folder (optional)</span>
+            <p className="text-xs text-ink-faint mb-2">
+              Powers the &quot;Live OneDrive folder&quot; panel below. Needs a free Azure app
+              registration — the README walks through it step by step.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-2">
+              <div className="md:col-span-2">
+                <label className="label" htmlFor="cfg-graph-client">Application (client) ID</label>
+                <input
+                  id="cfg-graph-client"
+                  className="input"
+                  value={draft.graphClientId}
+                  onChange={(e) => set({ graphClientId: e.target.value })}
+                  placeholder="00000000-0000-…"
+                />
+              </div>
+              <div>
+                <label className="label" htmlFor="cfg-graph-tenant">Account type</label>
+                <select
+                  id="cfg-graph-tenant"
+                  className="input"
+                  value={draft.graphTenant}
+                  onChange={(e) => set({ graphTenant: e.target.value })}
+                >
+                  <option value="consumers">Personal</option>
+                  <option value="organizations">Work/school</option>
+                  <option value="common">Either</option>
+                </select>
+              </div>
+              <div className="md:col-span-2">
+                <label className="label" htmlFor="cfg-graph-folder">Folder share link</label>
+                <input
+                  id="cfg-graph-folder"
+                  className="input"
+                  value={draft.graphFolderUrl}
+                  onChange={(e) => set({ graphFolderUrl: e.target.value })}
+                  placeholder="https://1drv.ms/…  (Share → Copy link on the folder)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="flex items-center gap-2 pt-1">
           <button type="submit" className="btn btn-accent" disabled={!dirty || saving}>
             {saving ? 'Saving…' : 'Save settings'}
           </button>
           {savedFlash && <span className="text-xs text-sage">Saved to the vault</span>}
         </div>
-
-        <p className="text-xs text-ink-faint border-t border-edge pt-2.5">
-          Planned upgrade: live folder listing via Microsoft Graph, so this tab can browse the
-          manuscript&apos;s OneDrive folder directly. Until then, the lists above are the
-          resources/resources.json manifest — edit them here or in Obsidian.
-        </p>
       </form>
     </section>
   )

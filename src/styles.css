@@ -124,6 +124,10 @@ body {
   font-family: var(--font-mono);
 }
 .prose-noir a { @apply text-teal underline underline-offset-2; }
+.prose-noir .wikilink {
+  @apply text-accent cursor-pointer underline decoration-dotted underline-offset-2;
+}
+.prose-noir .wikilink:hover { @apply text-ink; }
 .prose-noir hr { @apply border-edge my-4; }
 .prose-noir strong { @apply text-ink font-semibold; }
 

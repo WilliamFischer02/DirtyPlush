@@ -76,8 +76,27 @@ export function slugify(name) {
     .replace(/^-+|-+$/g, '') || 'untitled'
 }
 
-/** Render markdown to sanitized HTML for display. */
+/**
+ * Obsidian [[wikilinks]] → clickable spans, resolved before markdown parsing.
+ * Supports [[Target]] and [[Target|shown text]]. Containers that render this
+ * HTML delegate clicks on [data-wikilink] to open the matching character.
+ */
+function expandWikilinks(md) {
+  return String(md ?? '').replace(
+    /\[\[([^\[\]|]+)(?:\|([^\[\]]+))?\]\]/g,
+    (_, target, alias) => {
+      const t = target.trim()
+      const shown = (alias || target).trim()
+      // The attribute value is HTML-escaped; marked passes raw HTML through.
+      const esc = t.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
+      const escShown = shown.replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      return `<span class="wikilink" data-wikilink="${esc}" role="link" tabindex="0">${escShown}</span>`
+    },
+  )
+}
+
+/** Render markdown (with Obsidian wikilinks) to sanitized HTML for display. */
 export function renderMarkdown(md) {
-  const html = marked.parse(md ?? '', { async: false, gfm: true, breaks: true })
+  const html = marked.parse(expandWikilinks(md), { async: false, gfm: true, breaks: true })
   return DOMPurify.sanitize(html)
 }

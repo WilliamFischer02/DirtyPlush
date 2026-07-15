@@ -8,7 +8,8 @@
  * is editable and persists via saveBeats.
  */
 import { useEffect, useMemo, useState } from 'react'
-import { renderMarkdown, slugify } from '../../lib/markdown.js'
+import { slugify } from '../../lib/markdown.js'
+import WikiProse from '../WikiProse.jsx'
 import { useConfirm } from '../../state/UXContext.jsx'
 import { safeColor } from './timelineUtils.js'
 
@@ -446,10 +447,7 @@ export default function StructurePanel({ beats, events, saveBeats, onOpenEvent, 
               </div>
             </div>
             {active.craft ? (
-              <div
-                className="prose-noir mt-2 max-w-3xl"
-                dangerouslySetInnerHTML={{ __html: renderMarkdown(active.craft) }}
-              />
+              <WikiProse markdown={active.craft} className="mt-2 max-w-3xl" />
             ) : (
               <div className="mt-2 text-sm text-ink-faint italic">No craft notes yet — Edit beat to add some.</div>
             )}

@@ -3,7 +3,7 @@
  * pins currently in view (nearest first), and the selected pin's full
  * record or its editor. Presentation only; all data flows in as props.
  */
-import { renderMarkdown } from '../../lib/markdown.js'
+import WikiProse from '../WikiProse.jsx'
 import { CATEGORIES, categoryColor, distanceKm, featureId, featureLatLng } from './mapUtils.js'
 import LocationEditor from './LocationEditor.jsx'
 
@@ -59,7 +59,7 @@ function RegionCard({ feature, compact, onEdit }) {
           <summary className="cursor-pointer text-xs text-accent/80 hover:text-accent select-none">
             Author notes
           </summary>
-          <div className="prose-noir mt-1" dangerouslySetInnerHTML={{ __html: renderMarkdown(p.detail) }} />
+          <WikiProse markdown={p.detail} className="mt-1" />
         </details>
       )}
     </div>
@@ -141,7 +141,7 @@ function PinDetail({ feature, apiKey, onEdit, onDelete, onStreetView, onDeselect
         </p>
       )}
       {p.detail && (
-        <div className="prose-noir" dangerouslySetInnerHTML={{ __html: renderMarkdown(p.detail) }} />
+        <WikiProse markdown={p.detail} />
       )}
       {p.fields?.length > 0 && (
         <div>

@@ -19,6 +19,10 @@ export function UIProvider({ children }) {
   const [activeTab, setActiveTab] = useState('map')
   // filename of the character shown in the Profile tab
   const [profileCharacter, setProfileCharacter] = useState(null)
+  // One-shot deep links, set by the command palette and consumed (then
+  // cleared) by the target tab when it mounts or updates:
+  const [pendingEvent, setPendingEvent] = useState(null) // event id → Timeline opens its overlay
+  const [pendingLocation, setPendingLocation] = useState(null) // pin id → Map selects & pans
 
   /** Open a character's profile by filename or by frontmatter name. */
   const openProfile = useCallback((filenameOrName, characters) => {
@@ -36,9 +40,24 @@ export function UIProvider({ children }) {
     }
   }, [])
 
+  const openEvent = useCallback((id) => {
+    setPendingEvent(id)
+    setActiveTab('timeline')
+  }, [])
+
+  const openLocation = useCallback((id) => {
+    setPendingLocation(id)
+    setActiveTab('map')
+  }, [])
+
   const value = useMemo(
-    () => ({ activeTab, setActiveTab, profileCharacter, setProfileCharacter, openProfile }),
-    [activeTab, profileCharacter, openProfile],
+    () => ({
+      activeTab, setActiveTab, profileCharacter, setProfileCharacter, openProfile,
+      pendingEvent, setPendingEvent, openEvent,
+      pendingLocation, setPendingLocation, openLocation,
+    }),
+    [activeTab, profileCharacter, openProfile,
+      pendingEvent, openEvent, pendingLocation, openLocation],
   )
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>
 }
