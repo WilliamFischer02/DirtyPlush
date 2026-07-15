@@ -52,6 +52,17 @@ All of these are **off by default, and the app fully works without them**. Each 
 
 **Microsoft Graph (planned).** A future upgrade may sign in to Microsoft to list your case-file documents automatically. Today the case-file list is simply the `resources/resources.json` manifest — fully editable in the Resources tab, which is honest, simple, and yours.
 
+## Making it yours
+
+Under **Resources → Appearance** you can change the accent color (presets or any custom color), the text size, which tab opens first, and the map's default base layer — all saved into `writers-panel-config.json` in your vault, applied instantly, and reset-able by simply deleting the block from the file.
+
+A few quality-of-life features worth knowing:
+
+- **Keys 1–5** switch tabs from anywhere (as long as you're not typing in a field).
+- On the map, **◎** saves your current position and zoom as the *home view* — the map opens there from then on — and **⌂** flies back to it.
+- Timeline events have a **Duplicate** button (great for recurring beats), and the structure track supports adding, deleting, and reordering beats with the ◀ ▶ controls.
+- Every destructive action asks first in a proper dialog, and every save is confirmed with a quiet toast naming the exact file it wrote.
+
 ## The data model
 
 Everything the panel knows lives in the vault:

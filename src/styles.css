@@ -41,6 +41,34 @@ body {
   scrollbar-color: var(--color-edge) transparent;
 }
 
+/* Keyboard users get a clear, theme-colored focus ring; mouse users don't. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+}
+
+/* Entrances for the feedback layer (UXContext) */
+@keyframes dp-toast-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.dp-toast { animation: dp-toast-in 140ms ease-out; }
+
+@keyframes dp-dialog-in {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+.dp-dialog { animation: dp-dialog-in 120ms ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-toast, .dp-dialog { animation: none; }
+}
+
 /* ---- shared component classes ---- */
 
 .btn {

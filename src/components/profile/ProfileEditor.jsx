@@ -10,6 +10,7 @@
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { parseRelationships, renderMarkdown, serializeRelationship } from '../../lib/markdown.js'
+import { useConfirm } from '../../state/UXContext.jsx'
 import RelationshipsEditor from './RelationshipsEditor.jsx'
 
 const KNOWN_KEYS = ['name', 'role', 'relationships', 'theme_stance', 'arc_begin', 'arc_end']
@@ -35,6 +36,7 @@ export default function ProfileEditor({
   const [draft, setDraft] = useState(() => draftFrom(character))
   const [mode, setMode] = useState('preview') // 'preview' | 'edit'
   const [saving, setSaving] = useState(false)
+  const confirmDialog = useConfirm()
 
   // If the note changes underneath us (vault reload, import) and the draft
   // is clean, pick up the new content; in-progress edits are never clobbered.
@@ -85,13 +87,16 @@ export default function ProfileEditor({
 
   const revert = useCallback(() => setDraft(draftFrom(character)), [character])
 
-  const handleDelete = useCallback(() => {
+  const handleDelete = useCallback(async () => {
     const label = draft.name || character.filename
-    const ok = window.confirm(
-      `Delete "${label}"?\nThis removes characters/${character.filename} from the vault.`,
-    )
+    const ok = await confirmDialog({
+      title: `Delete "${label}"?`,
+      body: `This removes characters/${character.filename} from the vault.`,
+      confirmLabel: 'Delete',
+      danger: true,
+    })
     if (ok) onDelete(character.filename)
-  }, [draft.name, character.filename, onDelete])
+  }, [draft.name, character.filename, onDelete, confirmDialog])
 
   // Cmd/Ctrl+S saves — bound once, kept fresh through a ref
   const saveRef = useRef(null)

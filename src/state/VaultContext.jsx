@@ -28,6 +28,7 @@ import {
 import { findMissingSeedFiles, writeSeedFiles } from '../lib/seed.js'
 import { parseNote, serializeNote, slugify } from '../lib/markdown.js'
 import { parseArcsCsv, serializeArcsCsv } from '../lib/csvArcs.js'
+import { useConfirm, useToast } from './UXContext.jsx'
 
 const VaultContext = createContext(null)
 
@@ -44,7 +45,11 @@ function parseJson(text, label, errors) {
 }
 
 export function VaultProvider({ children }) {
+  const toast = useToast()
+  const confirm = useConfirm()
   const backendRef = useRef(null)
+  // Throttle "Saved …" toasts so rapid-fire saves to one file toast once
+  const lastSaveToastRef = useRef(new Map())
   const [status, setStatus] = useState({
     mode: 'loading', // 'loading' | 'fsa' | 'fallback'
     vaultName: '',
@@ -102,17 +107,22 @@ export function VaultProvider({ children }) {
     if (missing.length > 0) {
       let ok = true
       if (confirmSeed) {
-        ok = window.confirm(
-          `This folder is missing ${missing.length} Dirty Plush starter file(s) ` +
-          `(characters, timeline, map pins…).\n\nCreate them now? Existing files are never overwritten.`,
-        )
+        ok = await confirm({
+          title: 'Create starter files?',
+          body: `This folder is missing ${missing.length} Dirty Plush starter file(s) — characters, timeline, map pins, beats. Existing files are never overwritten.`,
+          confirmLabel: 'Create them',
+          cancelLabel: 'Not now',
+        })
       }
-      if (ok) await writeSeedFiles(backend, missing)
+      if (ok) {
+        await writeSeedFiles(backend, missing)
+        if (confirmSeed) toast(`Created ${missing.length} starter file(s) in the vault`, 'success')
+      }
     }
     backendRef.current = backend
     await loadAll(backend)
     setStatus((s) => ({ ...s, mode: backend.mode, vaultName: backend.name, needsReconnect: false }))
-  }, [loadAll])
+  }, [loadAll, confirm, toast])
 
   // Boot: restore a granted folder if we can, else fall back to browser storage.
   useEffect(() => {
@@ -147,11 +157,12 @@ export function VaultProvider({ children }) {
     try {
       const backend = await pickVaultDirectory()
       await adoptBackend(backend, { confirmSeed: true })
+      toast(`Connected vault "${backend.name}" — reading and writing real files`, 'success')
     } catch (err) {
       if (err && err.name === 'AbortError') return // user closed the picker
       setErrors((e) => [...e, `Could not open folder: ${err.message}`])
     }
-  }, [adoptBackend])
+  }, [adoptBackend, toast])
 
   const reconnectVault = useCallback(async () => {
     const handle = pendingHandleRef.current
@@ -174,8 +185,11 @@ export function VaultProvider({ children }) {
   }, [adoptBackend])
 
   const reloadVault = useCallback(async () => {
-    if (backendRef.current) await loadAll(backendRef.current)
-  }, [loadAll])
+    if (backendRef.current) {
+      await loadAll(backendRef.current)
+      toast('Vault reloaded — showing the latest file contents')
+    }
+  }, [loadAll, toast])
 
   const exportVault = useCallback(async () => {
     if (backendRef.current) await exportVaultZip(backendRef.current)
@@ -193,11 +207,17 @@ export function VaultProvider({ children }) {
   const write = useCallback(async (path, contents) => {
     try {
       await backendRef.current.writeFile(path, contents)
+      const now = Date.now()
+      const last = lastSaveToastRef.current.get(path) || 0
+      if (now - last > 2500) {
+        lastSaveToastRef.current.set(path, now)
+        toast(`Saved ${path}`)
+      }
     } catch (err) {
-      setErrors((e) => [...e, `Save failed for ${path}: ${err.message}`])
+      toast(`Save failed for ${path}: ${err.message}`, 'error', { sticky: true })
       throw err
     }
-  }, [])
+  }, [toast])
 
   const saveConfig = useCallback(async (next) => {
     setConfig(next)
