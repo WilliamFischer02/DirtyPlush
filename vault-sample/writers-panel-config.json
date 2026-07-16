@@ -4,5 +4,10 @@
     "web_url": ""
   },
   "google_maps_api_key": "",
+  "microsoft_graph": {
+    "client_id": "",
+    "tenant": "consumers",
+    "folder_share_url": ""
+  },
   "options": {}
 }

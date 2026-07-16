@@ -11,10 +11,11 @@
  * on unmount; the DataSet is diffed against the events state so edits
  * (including every overlay keystroke-then-save) never recreate the widget.
  */
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { DataSet, Timeline } from 'vis-timeline/standalone'
 import 'vis-timeline/styles/vis-timeline-graph2d.min.css'
 import { useVault } from '../../state/VaultContext.jsx'
+import { useUI } from '../../state/UIContext.jsx'
 import { useConfirm } from '../../state/UXContext.jsx'
 import {
   buildGroups, eventsToItems, makeEventId, nearestGroup, presetRange, toISODate,
@@ -43,6 +44,7 @@ const TIMELINE_CSS = `
 
 export default function TimelineTab() {
   const { events, saveEvents, beats, saveBeats } = useVault()
+  const { pendingEvent, setPendingEvent } = useUI()
   const confirmDialog = useConfirm()
 
   const containerRef = useRef(null)
@@ -56,6 +58,15 @@ export default function TimelineTab() {
 
   // null | { id } (existing event) | { seed: { start, group } } (new draft)
   const [overlay, setOverlay] = useState(null)
+  // Quick filter: substring over title + summary; hides non-matching items
+  const [filter, setFilter] = useState('')
+
+  // Deep link from the command palette: open the requested event's overlay
+  useEffect(() => {
+    if (!pendingEvent) return
+    if (events.some((e) => e.id === pendingEvent)) setOverlay({ id: pendingEvent })
+    setPendingEvent(null)
+  }, [pendingEvent, events, setPendingEvent])
 
   /* ---------- persistence callbacks used by the vis instance ---------- */
 
@@ -148,7 +159,14 @@ export default function TimelineTab() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  /* ---------- keep the DataSet in sync with events state ---------- */
+  /* ---------- keep the DataSet in sync with events state + filter ---------- */
+
+  const visibleEvents = useMemo(() => {
+    const q = filter.trim().toLowerCase()
+    if (!q) return events
+    return events.filter((e) =>
+      `${e.title || ''} ${e.summary || ''}`.toLowerCase().includes(q))
+  }, [events, filter])
 
   useEffect(() => {
     const items = itemsRef.current
@@ -159,12 +177,12 @@ export default function TimelineTab() {
     if (staleGroups.length) groups.remove(staleGroups)
     groups.update(nextGroups)
 
-    const nextItems = eventsToItems(events)
+    const nextItems = eventsToItems(visibleEvents)
     const keep = new Set(nextItems.map((i) => i.id))
     const stale = items.getIds().filter((id) => !keep.has(id))
     if (stale.length) items.remove(stale)
     items.update(nextItems)
-  }, [events])
+  }, [events, visibleEvents])
 
   /* ---------- toolbar actions ---------- */
 
@@ -242,6 +260,29 @@ export default function TimelineTab() {
         <button className="btn" onClick={() => setPreset('case-1994')}>1994 Case</button>
         <button className="btn" onClick={() => setPreset('frame-2024')}>2024 Frame</button>
         <button className="btn" onClick={() => setPreset('all')}>All</button>
+        <div className="w-px h-5 bg-edge mx-1" />
+        <div className="relative">
+          <input
+            className="input !w-52 !py-1"
+            placeholder="Filter events…"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          />
+          {filter && (
+            <button
+              className="absolute right-1.5 top-1/2 -translate-y-1/2 text-ink-faint hover:text-ink cursor-pointer"
+              title="Clear the filter"
+              onClick={() => setFilter('')}
+            >
+              ×
+            </button>
+          )}
+        </div>
+        {filter && (
+          <span className="text-[11px] text-ink-faint">
+            {visibleEvents.length}/{events.length} shown
+          </span>
+        )}
         <span className="ml-auto hidden xl:block text-[11px] text-ink-faint">
           scroll to zoom · drag to pan · drag items to move/resize · double-click empty space to add · click an item for detail
         </span>

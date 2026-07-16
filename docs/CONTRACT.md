@@ -136,15 +136,37 @@ that manually.
 ```js
 { novel: { onedrive_url: '', web_url: '' },   // ms-word:ofe|u| launcher + web fallback
   google_maps_api_key: '',                     // Street View (optional)
-  options: {} }
+  microsoft_graph: {                           // live OneDrive folder (optional)
+    client_id: '', tenant: 'consumers', folder_share_url: '' },
+  options: {
+    appearance: { accent, font_scale, default_tab, map_layer },  // Appearance panel
+    map_home: { lat, lng, zoom },              // map ⌂/◎ home view
+    theme_question: '', theme_thesis: '',      // Themes panel root (once edited)
+  } }
 ```
 
 ## Navigation API — `useUI()` from `src/state/UIContext.jsx`
 
 ```js
-const { activeTab, setActiveTab, profileCharacter, setProfileCharacter, openProfile } = useUI()
+const { activeTab, setActiveTab, profileCharacter, setProfileCharacter, openProfile,
+        pendingEvent, setPendingEvent, openEvent,          // deep link → Timeline overlay
+        pendingLocation, setPendingLocation, openLocation, // deep link → Map pin
+      } = useUI()
 openProfile(filenameOrName, characters)  // routes to Profile tab; pass useVault().characters
 ```
+`pendingEvent`/`pendingLocation` are one-shot: the target tab consumes the id
+in an effect and clears it with the setter. The command palette
+(`src/components/CommandPalette.jsx`, Ctrl/Cmd+K) is the main producer.
+
+## Feedback API — `src/state/UXContext.jsx` (outermost provider)
+
+`useToast()(message, tone?, {sticky}?)`, `await useConfirm()({title, body,
+confirmLabel, danger})`, `await usePrompt()({title, placeholder})` → string|null.
+Never use window.alert/confirm/prompt.
+
+Render markdown through `<WikiProse markdown={...}/>`
+(`src/components/WikiProse.jsx`) — it expands Obsidian `[[wikilinks]]` and
+routes clicks to the matching character profile.
 
 ## Styling
 

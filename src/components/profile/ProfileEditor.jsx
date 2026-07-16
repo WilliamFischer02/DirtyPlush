@@ -9,9 +9,10 @@
  * filename — noted small under the header).
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { parseRelationships, renderMarkdown, serializeRelationship } from '../../lib/markdown.js'
+import { parseRelationships, serializeRelationship } from '../../lib/markdown.js'
 import { useConfirm } from '../../state/UXContext.jsx'
 import RelationshipsEditor from './RelationshipsEditor.jsx'
+import WikiProse from '../WikiProse.jsx'
 
 const KNOWN_KEYS = ['name', 'role', 'relationships', 'theme_stance', 'arc_begin', 'arc_end']
 
@@ -112,10 +113,6 @@ export default function ProfileEditor({
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
-  const bodyHtml = useMemo(
-    () => (mode === 'preview' ? renderMarkdown(draft.body) : ''),
-    [mode, draft.body],
-  )
   const extraKeys = Object.keys(character.frontmatter || {}).filter((k) => !KNOWN_KEYS.includes(k))
 
   const segBtn = (m) =>
@@ -261,7 +258,7 @@ export default function ProfileEditor({
             </div>
             {mode === 'preview' ? (
               draft.body.trim() ? (
-                <div className="prose-noir px-5 py-4" dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+                <WikiProse markdown={draft.body} className="px-5 py-4" />
               ) : (
                 <div className="px-5 py-4 text-sm text-ink-dim">
                   Nothing written yet — switch to Edit to start the note.

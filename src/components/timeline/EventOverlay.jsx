@@ -5,9 +5,9 @@
  * persisted when the user hits Save (the parent calls saveEvents with the
  * full next array). Detail is markdown with a live preview.
  */
-import { useMemo, useRef, useState } from 'react'
-import { renderMarkdown } from '../../lib/markdown.js'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useConfirm } from '../../state/UXContext.jsx'
+import WikiProse from '../WikiProse.jsx'
 import {
   EVENT_COLORS, GROUPS, PRIORITIES, blankEvent, clampWeight, safeColor,
 } from './timelineUtils.js'
@@ -32,6 +32,17 @@ export default function EventOverlay({ event, seed, beats, onSave, onDelete, onC
 
   const dirty = JSON.stringify(draft) !== JSON.stringify(initialRef.current)
 
+  // Leaving the page with unsaved event edits asks first
+  useEffect(() => {
+    if (!dirty) return undefined
+    const onBeforeUnload = (e) => {
+      e.preventDefault()
+      e.returnValue = ''
+    }
+    window.addEventListener('beforeunload', onBeforeUnload)
+    return () => window.removeEventListener('beforeunload', onBeforeUnload)
+  }, [dirty])
+
   const sortedBeats = useMemo(
     () => [...beats].sort((a, b) => (a.order || 0) - (b.order || 0)),
     [beats],
@@ -45,7 +56,6 @@ export default function EventOverlay({ event, seed, beats, onSave, onDelete, onC
     return opts
   }, [draft.group])
 
-  const preview = useMemo(() => renderMarkdown(draft.detail || ''), [draft.detail])
   const color = safeColor(draft.color, draft.group)
 
   const requestClose = async () => {
@@ -246,7 +256,7 @@ export default function EventOverlay({ event, seed, beats, onSave, onDelete, onC
           <div className="min-h-0 overflow-y-auto px-4 py-3">
             <span className="label">Preview</span>
             {draft.detail ? (
-              <div className="prose-noir" dangerouslySetInnerHTML={{ __html: preview }} />
+              <WikiProse markdown={draft.detail} />
             ) : (
               <div className="text-sm text-ink-faint italic">Nothing to preview yet.</div>
             )}

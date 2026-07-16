@@ -4,6 +4,7 @@ import { VaultProvider, useVault } from './state/VaultContext.jsx'
 import { UXProvider } from './state/UXContext.jsx'
 import { applyAppearance, getAppearance } from './lib/appearance.js'
 import VaultBar from './components/VaultBar.jsx'
+import CommandPalette from './components/CommandPalette.jsx'
 import MapTab from './components/map/MapTab.jsx'
 import TimelineTab from './components/timeline/TimelineTab.jsx'
 import CharactersTab from './components/characters/CharactersTab.jsx'
@@ -108,10 +109,24 @@ function Shell() {
             </button>
           ))}
         </nav>
-        <div className="ml-auto py-2">
+        <div className="ml-auto py-2 flex items-center gap-2">
+          <button
+            className="btn hidden md:flex items-center gap-1.5 text-ink-faint"
+            title="Search everything (Ctrl+K / ⌘K)"
+            onClick={() => window.dispatchEvent(
+              new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }),
+            )}
+          >
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" />
+            </svg>
+            <span className="text-xs">⌘K</span>
+          </button>
           <VaultBar />
         </div>
       </header>
+
+      <CommandPalette />
 
       <ErrorBanner />
 
